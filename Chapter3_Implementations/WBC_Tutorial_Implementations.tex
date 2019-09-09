@@ -44,6 +44,8 @@
 \end{center}
 }
 
+\subsection{Terminology and Notion}
+
 \frame
 {
 \frametitle{The main concept of encoding}
@@ -121,15 +123,17 @@ Two transformations are required for the white-box cryptosystems:
 \end{enumerate}
 }
 
+\subsection{Producing encoded implementations}
+
 \frame
 {
 \frametitle{Mixing bijection}
 A \textit{mixing bijection} is a bijective \textbf{AT} which attempts to maximize the dependency of each output bit on all input bits.
 
 \begin{itemize}
-\item For example, a bit permutation layer $P$ might be sparse in a matrix representation (such as the $P$ layer in DES). 
+\item For example, a bit permutation layer $P$ might be sparse in a matrix representation (such as the $P$ layer in DES).
 
-\item In order to diffuse more information over more bits, we can represent such a permutation $P=J \circ K$, where $J = P \circ K^{-1}$. 
+\item In order to diffuse more information over more bits, we can represent such a permutation $P=J \circ K$, where $J = P \circ K^{-1}$.
 \end{itemize}
 }
 
@@ -178,6 +182,21 @@ The effect is that if $P$ is lossy, $Q$ may lose less information (or no informa
 \frametitle{Output splitting?}
 We can encode a function $P$ as $k \geq 2$ functions $P_{1}, P_{2}, \cdots, P_{k}$, where the encoded implementation for each part can mix in additional entropy. For example, \[^{n}_{m}P_{2}(_{m}e) =P(_{m}e) \oplus P_{1}(_{m}e)\]
 
+}
+
+\subsection{Wide-input encoded ATs}
+
+\frame
+{
+\frametitle{Wide-input encoding}
+\begin{itemize}
+\item Due to the storage costs, it is impractical to improve the input-size of an sbox.
+
+\item But we can use a concatenated encoding, build a wide-input encoding for a network of sboxes.
+\end{itemize}
+
+For an sbox $S$ with $n$-bit input and output (normally 4-bit or 8-bit), we can use the following wide-input encoding method:
+\[^{k\times n}_{k\times m}A \circ (S_{1}||S_{2}||\cdots||S_{k})= ^{n}_{m}A_{1} \circ S_{1}||^{n}_{m}A_{2} \circ S_{2}||\cdots||^{n}_{m}A_{k} \circ S_{k}\]
 }
 
 \frame
