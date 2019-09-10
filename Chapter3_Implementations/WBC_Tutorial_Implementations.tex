@@ -199,6 +199,38 @@ For an sbox $S$ with $n$-bit input and output (normally 4-bit or 8-bit), we can 
 \[^{k\times n}_{k\times m}A \circ (S_{1}||S_{2}||\cdots||S_{k})= ^{n}_{m}A_{1} \circ S_{1}||^{n}_{m}A_{2} \circ S_{2}||\cdots||^{n}_{m}A_{k} \circ S_{k}\]
 }
 
+\section{White-box AES}
+
+\frame
+{
+\frametitle{Chow et al.'s white-box AES}
+
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=7cm, height=3cm]{./pics/AES.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=7cm, height=3cm]{./pics/Chow_WBAES.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+
+
+}
+
 \frame
 {
 \begin{center}
