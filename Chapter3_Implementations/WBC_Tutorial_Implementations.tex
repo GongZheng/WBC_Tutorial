@@ -62,7 +62,7 @@ For linear transformation, there are three kinds of encoding terms to obscure th
 {
 \frametitle{Encoding}
 \begin{definition}{\textbf{(encoding)}}
-Let $X$ be a transformation from $m$ to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X^{'}=G \circ F \circ F^{-1}$ an encoded version of $X$. $F$ is an input encoding and G is an output encoding.
+Let $X$ be a transformation from $m$ to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X^{'}=G \circ X \circ F^{-1}$ an encoded version of $X$. $F$ is an input encoding and G is an output encoding.
 \end{definition}
 }
 
@@ -98,7 +98,7 @@ $^{n}_{m}E$ is an \textit{entropy-transference function} such that $^{n}_{m}E$ m
 A vector to vector transformation function $P$ which can be define for all $_{m}e$ by \[^{n}_{m}P(_{m}e)= ^{n}_{m}M_{m}\cdot e + _{n}d\], or \[P(e)=M\cdot e + d,\]
 where $M$ is a constant matrix and $d$ is a constant \textit{displacement/masking/affine} vector.
 
-We consider \textbf{ATs} over GF(2). Note if $A$ and $B$ are \textbf{ATs}, so $A||B$ and $A \circ B$.
+We consider \textbf{ATs} over $GF(2)$. Note if $A$ and $B$ are \textbf{ATs}, so $A||B$ and $A \circ B$.
 }
 
 \frame
@@ -127,9 +127,9 @@ Two transformations are required for the white-box cryptosystems:
 A \textit{mixing bijection} is a bijective \textbf{AT} which attempts to maximize the dependency of each output bit on all input bits.
 
 \begin{itemize}
-\item For example, a bit permutation layer $P$ might be sparse in a matrix representation (such as the $P$ layer in DES). 
+\item For example, a bit permutation layer $P$ might be sparse in a matrix representation (such as the $P$ layer in DES).
 
-\item In order to diffuse more information over more bits, we can represent such a permutation $P=J \circ K$, where $J = P \circ K^{-1}$. 
+\item In order to diffuse more information over more bits, we can represent such a permutation $P=J \circ K$, where $J = P \circ K^{-1}$.
 \end{itemize}
 }
 
