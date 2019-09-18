@@ -222,7 +222,7 @@ For an sbox $S$ with $n$-bit input and output (normally 4-bit or 8-bit), we can 
 {
 \frametitle{DES sbox and its local security}
 Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit output sbox $^{6}_{4}S(.)$. To build a local secure look-up table $T$, we have
-\[^{8}_{8}T(a||^{2}b)=^{6}_{4}S(a)||a_{0}||a_{5}||b.\]
+\[^{8}_{8}T(a||^{2}b)=^{6}_{4}S(k\oplus a)||a_{0}||a_{5}||b.\]
 
 \begin{figure}[h]
 \centering
