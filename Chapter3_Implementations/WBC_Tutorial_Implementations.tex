@@ -217,11 +217,35 @@ For an sbox $S$ with $n$-bit input and output (normally 4-bit or 8-bit), we can 
 \end{center}
 }
 
+\frame
+{
+\frametitle{DES sbox and its local security}
+Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit output sbox $^{6}_{4}S(.)$. To build a local secure look-up table $T$, we have
+\[^{8}_{8}T(a||^{2}b)=^{6}_{4}S(a)||a_{0}||a_{5}||b.\]
+
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=5cm, height=5cm]{./pics/DES_Sbox.png}};
+    
+     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=5cm, height=5cm]{./pics/WBDES_Tbox.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+
+
+
+}
+
 \section{White-box AES}
 
 \frame
 {
 \frametitle{Chow et al.'s white-box AES}
+
 
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=7cm, height=3cm]{./pics/AES.png}};
