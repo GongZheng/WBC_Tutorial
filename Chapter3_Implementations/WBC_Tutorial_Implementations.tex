@@ -174,9 +174,9 @@ For a function $^{n}_{m}P$, we can put a \textit{by-pass encoding} $^{b}_{a}E$ s
 \frame
 {
 \frametitle{Split-path encoding}
-Form a function $^{n}_{m}P$, we may use an encoding that is really a concatenation of two separate encodings. That is, we define
+Form a function $^{n}_{m}P$, we may use an encoding that is \textcolor[rgb]{1.00,0.00,0.00}{really a concatenation of two separate encodings}. That is, we define
 \[^{n+k}_{m}Q(_{m}e)=P(_{m}e)||^{k}_{m}R(_{m}e)\]
-The effect is that if $P$ is lossy, $Q$ may lose less information (or no information). This method is used to achieve \textit{local security}.
+The effect is that if $P$ is lossy, $Q$ may lose less information (or no information). This method is used to achieve \textcolor[rgb]{1.00,0.00,0.00}{local security} on Chow \textit{et al.}'s white-box DES.
 }
 
 \frame
@@ -222,7 +222,7 @@ For an sbox $S$ with $n$-bit input and output (normally 4-bit or 8-bit), we can 
 {
 \frametitle{DES sbox and its local security}
 Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit output sbox $^{6}_{4}S(.)$. To build a local secure look-up table $T$, we have
-\[^{8}_{8}T(a||^{2}b)=^{6}_{4}S(k\oplus a)||a_{0}||a_{5}||b.\]
+\[^{8}_{8}T(a||^{2}a)=^{6}_{4}S(k\oplus a)||a_{0}||a_{1}||a_{4}||a_{5}.\]
 
 \begin{figure}[h]
 \centering
