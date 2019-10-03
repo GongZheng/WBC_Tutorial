@@ -231,6 +231,18 @@ Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit o
 \end{figure}
 }
 
+\frame
+{
+\frametitle{(Dis)advantages of Chow \textit{et al}.'s white-box DES}
+\begin{itemize}
+    \item Change DES from Feistel to WBDES into a SPN structure through bypassing encoding;
+    \item Modify 6-to-4-bit sboxes to 8-to-8-bit look-up tables to enhance the local security;
+    \item 8-to-8-bit look-up tables are not stronger enough for resisting exhaustive search attacks;
+    \item Input-output nonlinear encodings become the key point of its white-box security, yet fails in the later research.
+\end{itemize}
+
+}
+
 \section{White-box AES}
 
 \frame
