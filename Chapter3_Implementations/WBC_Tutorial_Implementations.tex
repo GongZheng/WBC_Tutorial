@@ -251,7 +251,7 @@ Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit o
 \frametitle{Chow et al.'s white-box AES}
 \begin{itemize}
 \item At SAC 2002, Chow et al. proposed first white-box AES implementation with look-up tables.
-\item The terminology and notation of this implementation are inherited in the following white-box AES schemes.
+\item The strategy is to compose each step in the AES algorithm with randomly chosen bijections, which are also called \textcolor[rgb]{1.00,0.00,0.00}{internal and external encodings}.
 \end{itemize}
 
 \begin{center}
@@ -268,6 +268,66 @@ Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit o
 \end{center}
 }
 
+\frame
+{
+\frametitle{Fixed/Dynamic Key Approaches of WBC}
+
+\begin{itemize}
+\item \textbf{Fixed key approach}: The white-box key is fixed with the certain implementation beforehand. \textcolor[rgb]{1.00,0.00,0.00}{But it can still be changed since software is just binary.}
+
+\item \textbf{Dynamic key approach}: The white-box key is an input encrypted/encoded value in the certain implementation, just not fixed beforehand.
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{The look-up tables of Chow \textit{et al}.'s white-box AES}
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=6cm, height=6cm]{./pics/Look-up_tables_ChowWBAES}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+}
+
+\frame
+{
+\frametitle{The look-up tables for the SubByte step}
+For $10$ rounds AES-128, there are $16\times 10$ SubByte operations. Thus we need $160$ $8\times 8$ look-up tables to replace the SubByte operations of AES-128.
+\begin{itemize}
+\item From Round 1 to Round 9:
+\[T^{r}_{i,j}(x)=S(x\oplus k^{r-1}_{i,j}), i,j={0,1,2,3},r={0,1,\cdots, 9}.\]
+
+\item The final Round 10 also absorbs the post-whitening key as follows:
+    \[T^{10}_{i,j}=S(x\oplus k^{9}_{i,j})\oplus k^{10}_{i,j}.\]
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Input and output encodings}
+\begin{itemize}
+\item Let $X$ be a transformation from $m$ to $n$ bits.
+\item Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. The encoded version of $X$ is
+  \[X = G \circ X \circ F^{-1}.\]
+\item $F$ is \textcolor[rgb]{1.00,0.00,0.00}{the input encoding} and $G$ is \textcolor[rgb]{1.00,0.00,0.00}{the output encoding}.
+\item To avoid huge tables, we can construct an input or output encoding as the concatenation of smaller bijections.
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Concatenation of encodings}
+Since encodings are arbitrary, results are meaningful only if the output encoding of one step matches the input encoding of the next. For example, if step $X$ is followed by step $Y$ (i.e., we compute $Y \circ X$), they are encoded as
+\[Y' \circ X' = (H \circ Y \circ G^{-1}) \circ (G \circ X \circ F^{-1}) = H \circ (Y \circ X) \circ F^{-1}.\]
+
+}
 
 \frame
 {
@@ -299,6 +359,7 @@ Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit o
 
 
 }
+
 
 
 \frame
