@@ -353,9 +353,27 @@ It is worth noting that if with any significant probability that $G \circ E_{K} 
 {
 \frametitle{Min-loss encoding}
 \begin{itemize}
-\item If $X$ is an $n \tims m$ transformation (mapping $m$ bits to $n$ bits), $m \geq n$, it will lose at least (and possible exactly) $m - n$ bits of input information.
-    
+\item If $X$ is an $n \times m$ transformation (mapping $m$ bits to $n$ bits), $m \geq n$, it will lose at least (and possible exactly) $m - n$ bits of input information.
+
 \item However, if there are only $2^{n-k}$ possible outputs, $X$ drops $m-n+k$ bits.
+
+\item We can hide such loss points in a look-up table network, delaying losses to later points in computation. 
+    
+\item This increases the size of the attacker's search space for encodings. We call this concealment \textcolor[rgb]{1.00,0.00,0.00}{min-loss encoding}.
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{The non-linear encodings}
+SubBytes+AddRoundKey+MixColumns = The non-linear encodings
+
+\begin{figure}[h]
+\setcounter{subfigure}{0}
+\centering
+\subfigure[MixColumns:Multiplication]{\includegraphics[width=5cm, height=4cm]{./pics/MC_MUX.png}}
+\subfigure[MixColumns:Addition]{\includegraphics[width=5cm, height=4cm]{./pics/MC_ADD.png}}
+\end{figure}
 }
 
 
