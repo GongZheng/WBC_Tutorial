@@ -271,11 +271,22 @@ Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit o
 \frame
 {
 \frametitle{Fixed/Dynamic Key Approaches of WBC}
-
 \begin{itemize}
 \item \textbf{Fixed key approach}: The white-box key is fixed with the certain implementation beforehand. \textcolor[rgb]{1.00,0.00,0.00}{But it can still be changed since software is just binary.}
 
 \item \textbf{Dynamic key approach}: The white-box key is an input encrypted/encoded value in the certain implementation, just not fixed beforehand.
+\end{itemize}
+
+No matter whether choosing fixed or dynamic key approach, the white-box instance generator takes a key and random seed(s) as input, and generates a key-customized white-box protected cipher implementation.
+}
+
+\frame
+{
+\frametitle{The balance between theoretical and practical white-box security}
+\begin{itemize}
+\item Taken to an unrealistic extreme, one could use a single look-up table of about $2^{128}\times 16$ bytes representing an AES-128 instance. But this method is impractical since it requires almost $5.4 \times 10^{39}$ bytes storage for the table.
+
+\item Actually, all the white-box symmetric-key algorithms are trying to \textcolor[rgb]{1.00,0.00,0.00}{find the balance between the extreme case and smaller look-up tables combinations}.
 \end{itemize}
 }
 
@@ -315,7 +326,7 @@ For $10$ rounds AES-128, there are $16\times 10$ SubByte operations. Thus we nee
 \begin{itemize}
 \item Let $X$ be a transformation from $m$ to $n$ bits.
 \item Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. The encoded version of $X$ is
-  \[X = G \circ X \circ F^{-1}.\]
+  \[X' = G \circ X \circ F^{-1}.\]
 \item $F$ is \textcolor[rgb]{1.00,0.00,0.00}{the input encoding} and $G$ is \textcolor[rgb]{1.00,0.00,0.00}{the output encoding}.
 \item To avoid huge tables, we can construct an input or output encoding as the concatenation of smaller bijections.
 \end{itemize}
@@ -324,10 +335,29 @@ For $10$ rounds AES-128, there are $16\times 10$ SubByte operations. Thus we nee
 \frame
 {
 \frametitle{Concatenation of encodings}
-Since encodings are arbitrary, results are meaningful only if the output encoding of one step matches the input encoding of the next. For example, if step $X$ is followed by step $Y$ (i.e., we compute $Y \circ X$), they are encoded as
+Similar to Chow \textit{et al.}'s white-box DES, results are meaningful only if the output encoding of one step matches the input encoding of the next. For example, if step $X$ is followed by step $Y$ (i.e., we compute $Y \circ X$), they are encoded as
 \[Y' \circ X' = (H \circ Y \circ G^{-1}) \circ (G \circ X \circ F^{-1}) = H \circ (Y \circ X) \circ F^{-1}.\]
 
 }
+
+\frame
+{
+\frametitle{The encoded cipher $E$}
+An $r$-round encryption $E_{K}=R_{1}\circ R_{2} \circ \cdots \circ R_{r}$ will be protected as an encoded version $E'_{K}$, such that
+\[E'_{K}= G \circ R_{1} \circ H^{-1} \circ H \circ R_{2} \circ \cdots \circ R_{r} \circ F^{-1}=G \circ E_{K} \circ F^{-1}.\]
+
+It is worth noting that if with any significant probability that $G \circ E_{K} \circ F^{-1}$ is weaker than $E_{K}$, then intuitively one expects the cipher $E$ is seriously flawed for key $K$ or it is weakened by the mapping functions $G$ and $F^{-1}$.
+}
+
+\frame
+{
+\frametitle{Min-loss encoding}
+\begin{itemize}
+\item If $X$ is an $n \tims m$ transformation (mapping $m$ bits to $n$ bits), $m \geq n$, it will lose at least (and possible exactly) $m - n$ bits of input information.
+    
+\item However, if there are only $2^{n-k}$ possible outputs, $X$ drops $m-n+k$ bits.
+}
+
 
 \frame
 {
