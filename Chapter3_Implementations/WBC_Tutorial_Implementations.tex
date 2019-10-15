@@ -357,8 +357,8 @@ It is worth noting that if with any significant probability that $G \circ E_{K} 
 
 \item However, if there are only $2^{n-k}$ possible outputs, $X$ drops $m-n+k$ bits.
 
-\item We can hide such loss points in a look-up table network, delaying losses to later points in computation. 
-    
+\item We can hide such loss points in a look-up table network, delaying losses to later points in computation.
+
 \item This increases the size of the attacker's search space for encodings. We call this concealment \textcolor[rgb]{1.00,0.00,0.00}{min-loss encoding}.
 \end{itemize}
 }
@@ -376,6 +376,77 @@ SubBytes+AddRoundKey+MixColumns = The non-linear encodings
 \end{figure}
 }
 
+\frame
+{
+\frametitle{Mixing bijections}
+In Chow \textit{et al.}'s white-box AES, the term \textcolor[rgb]{1.00,0.00,0.00}{mixing bijection} is used to describe a linear bijection as matrices over $GF(2)$
+
+\begin{itemize}
+\item For a $n$-bit bjiection, there are $2^{n}!$ combinations, of which $2^{n}\prod^{n-1}_{i=0}(2^{n}-2^{i})$ are affine.
+
+\item For example, there are $16! \approx 2.09 \times 10^{13}$ 4-bit bijections of which $322,560$ (less than $0.000002\%$) are affine.
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Mixing bijections in Chow \textit{et al.}'s WBAES}
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=6cm, height=7cm]{./pics/Chow_WBAES_BijectionStructure.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+}
+
+\frame
+{
+\frametitle{Security analysis of WBAC}
+\begin{itemize}
+\item keyspace-like security measures:
+    \begin{enumerate}
+    \item white-box diversity
+    \item white-box ambiguity
+    \end{enumerate}
+
+\item Cryptanalysis measures:
+    \begin{enumerate}
+    \item Square-like attack
+    
+    \end{enumerate}
+
+\item Side-channel measures:
+    \begin{enumerate}
+    \item differential computation analysis
+    \item differential fault analysis
+    \end{enumerate}
+
+\end{itemize}
+
+}
+
+\frame
+{
+\frametitle{White-box diversity}
+\begin{itemize}
+\item In a white-box block cipher algorithm, if encodings `encrypt' implementation steps, we can count the possible encoded steps. We call this metric \textcolor[rgb]{1.00,0.00,0.00}{white-box diversity}.
+
+\item The white-box diversity of a given table type counts on how many distinct constructions exist for a table of that type, which might exceed the number of distince tables.
+    
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{White-box ambiguity}
+The \textcolor[rgb]{1.00,0.00,0.00}{white-box ambiguity} for a given table is the number of distinct constructions which could produce exactly that the same table.
+}
 
 \frame
 {

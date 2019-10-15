@@ -2,7 +2,9 @@
 *.out
 *.toc
 *.gz
+*.snm
 *.pdf
 *.nav
 *.log
 *.aux
+*.sav
