@@ -463,21 +463,33 @@ The \textcolor[rgb]{1.00,0.00,0.00}{white-box ambiguity} for a given table is th
 
 \frame
 {
-\frametitle{Square-like attack}
+\frametitle{Square-like attack (1)}
 \begin{itemize}
 \item If the input and output of Tbox/MixColumns are not mixed, attacker can recover the key by using the similar method from AES Square attack.
-    
-\item Assume the attacker finds two pairs of input $(a_{0}, a_{1}, a_{2}, a_{3})$ and $(b_{0}, b_{1}, b_{2}, b_{3})$, which have only one non-zero output difference block. Such that, 
+
+\item Assume the attacker finds two pairs of input $(a_{0}, a_{1}, a_{2}, a_{3})$ and $(b_{0}, b_{1}, b_{2}, b_{3})$, which have only one non-zero output difference block. Such that,
     \[y_{i} = S(a_{i} \oplus k_{i}) \oplus S(b_{i} \oplus k_{i}).\]
-    
-\item Then we have 
-\begin{align}
-01(y_{0}) \oplus 02(y_{1}) \oplus 03(y_{2}) \oplus 01(y_{3}) &= 00;\\
-01(y_{0}) \oplus 01(y_{1}) \oplus 02(y_{2}) \oplus 03(y_{3}) &= 00;\\
-03(y_{0}) \oplus 01(y_{1}) \oplus 01(y_{2}) \oplus 02(y_{3}) &= 00;
-\end{align}
 
 \end{itemize}
+}
+
+\frame
+{
+\frametitle{Square-like attack (2)}
+\begin{itemize}
+\item Then we have
+\begin{align}
+01(y_{0}) \oplus 02(y_{1}) \oplus 03(y_{2}) \oplus 01(y_{3}) &= 00 \\
+01(y_{0}) \oplus 01(y_{1}) \oplus 02(y_{2}) \oplus 03(y_{3}) &= 00 \\
+03(y_{0}) \oplus 01(y_{1}) \oplus 01(y_{2}) \oplus 02(y_{3}) &= 00
+\end{align}
+
+\item The above system has the follow solution
+\begin{align}
+y_{0} &= ec(y_{3}) \\
+y_{1} &= 9a(y_{3}) \\
+y_{2} &= b7(y_{3})
+\end{align}
 }
 
 \frame

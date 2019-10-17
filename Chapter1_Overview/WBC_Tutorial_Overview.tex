@@ -1,7 +1,7 @@
 \documentclass{beamer}
 \usepackage{times}
 \usepackage{tikz}
-\usepackage{beamerthemesplit} 
+\usepackage{beamerthemesplit}
 
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 1 Overview}
@@ -24,11 +24,11 @@
 \frame
 {
   \frametitle{What is cryptology?}
-  
+
   \textit{``Cryptology is about communication in the presence of \underline{adversaries or potential adversaries}"     \rightline{- R. Rivest}}
   \begin{center}
   \begin{tikzpicture}
- 
+
         \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=8cm, height=5cm]{./pics/cryptosystem.png}};
         \begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
@@ -37,9 +37,9 @@
         \draw[black, thin, rounded corners] (-0.1,0.0) rectangle (1.1,1.0);
 
     \end{scope}
-  
+
   \end{tikzpicture}
-        \end{center}  
+        \end{center}
 }
 
 \frame
@@ -48,7 +48,7 @@
 
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=6cm]{./pics/cryptography.png}};
- 
+
     \begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -62,7 +62,7 @@
 \frame
 {
  \frametitle{What we need for cryptography?}
- 
+
  \begin{itemize}
  \setlength{\itemsep}{12pt}
  %\setlength{\parsep}{0pt}
@@ -101,7 +101,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8.5cm, height=5.5cm]{./pics/crypto_key_types.png}};
- 
+
     \begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -140,9 +140,9 @@
 \begin{itemize}
  \setlength{\itemsep}{12pt}
  \item Black-box model: the adversary cannot intrude/alternate/observe the inside of the cryptosystem;
- 
+
  \item Grey-box model: the adversary can \textcolor{red}{partially} intrude/alternate/observe the inside of the cryptosystem;
- 
+
  \item White-box model: the adversary can \textcolor{red}{fully} intrude/alternate/observe the inside of the cryptosystem;
 \end{itemize}
 }
@@ -169,14 +169,31 @@
 
 \frame
 {
-\frametitle{Hardware-aided software security}
-In practice, many kinds of hardware are used to protect software security
+\frametitle{Software protection techniques}
+\begin{itemize}
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{Reverse engineering attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Code obfuscation}
+
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{Modification attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Tamper resistance}
+
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{Program-based attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Software diversity}
+
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{BORE (Break Once Run Everywhere) attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Online/Offline registration verification}
+\end{itemize}
+
+In direct usage, \textcolor[rgb]{1.00, 0.00, 0.00}{white-box cryptography} can only solve the key recovery attacks and diversity problems. But it might be a building 
+block for supporting code obfuscation, tamper resistance, software diversity and registration verification protection.
+}
+
+\frame
+{
+\frametitle{Hardware-aided software key security}
+In practice, many kinds of hardware are used to protect software \textcolor[rgb]{1.00, 0.00, 0.00}{key security}.
 \begin{columns}[c]
 \column{.6\textwidth}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item Environment validation: TPMs
-\item Authenticity: USB keys, TPMs 
+\item Authenticity: USB keys, TPMs
 \item Functionality: SE, Crypto ICs, Software USB doggles
 \end{itemize}
 \column{.4\textwidth}
@@ -193,7 +210,7 @@ In practice, many kinds of hardware are used to protect software security
 \frametitle{Why we need white-box crypto?}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item Although hardware-protected black/grey-box solutions are matured in the last decade, software solutions are still useful in many areas. 
+\item Although hardware-protected black/grey-box solutions are matured in the last decade, software solutions are still useful in many areas.
 
 \item To the best of my knowledge, the white-box crypto (which includes symmetric/asymmetric-key cryptosystems) is pivotal for the following practical issues.
 \begin{itemize}
@@ -216,23 +233,23 @@ In practice, many kinds of hardware are used to protect software security
 \begin{minipage}[b]{0.3\textwidth}
 \centering
 \includegraphics[width=3cm]{./pics/mickey.jpg}
-%\parbox{.45\linewidth}{\centering\small a.aa} 
+%\parbox{.45\linewidth}{\centering\small a.aa}
 \end{minipage}%
 \hspace{0.04\textwidth}%
 \begin{minipage}[b]{0.3\textwidth}
 \centering
 \includegraphics[width=3cm]{./pics/iphonekey.jpeg}
-%\parbox{.45\linewidth}{\centering\small b.bb} 
+%\parbox{.45\linewidth}{\centering\small b.bb}
 \end{minipage}\\[20pt]
 \begin{minipage}[b]{0.3\textwidth}
 \centering
 \includegraphics[width=2.7cm]{./pics/usb-lightning.jpg}
-%\parbox{.45\linewidth}{\centering\small c.cc} 
+%\parbox{.45\linewidth}{\centering\small c.cc}
 \end{minipage}
 \begin{minipage}[b]{0.3\textwidth}
 \centering
 \includegraphics[width=3cm]{./pics/keyproblem.png}
-%\parbox{.45\linewidth}{\centering\small c.cc} 
+%\parbox{.45\linewidth}{\centering\small c.cc}
 \end{minipage}
 \end{figure}
 }
@@ -323,7 +340,7 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \item functionality is executed as designed
 
 \item key is not leaked
-\end{itemize} 
+\end{itemize}
 
 \end{itemize}
 
@@ -340,7 +357,7 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
- 
+
     \begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -361,7 +378,7 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -400,7 +417,7 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=4cm, height=4cm]{./pics/WBC_BG.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
