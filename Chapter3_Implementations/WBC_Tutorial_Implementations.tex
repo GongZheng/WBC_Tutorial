@@ -233,6 +233,57 @@ Let $6$-bit input $a=a_{0}a_{1}\cdots a_{5}$ and DES $6$-bit input and $4$-bit o
 
 \frame
 {
+\frametitle{An illustration of Chow \textit{et al.}'s white-box DES (1)}
+At ACM DRM 2002, Jacob, Boneh and Felten proposed a differential fault analysis on Chow \textit{et al.}'s WBDES\footnote{\scriptsize{M. Jacob et al. Attacking an obfuscated cipher by injecting faults. ACM DRM 2002.}}. In this paper, Jacob \textit{et al.} gave a more clear illustration on Chow \textit{et al.}'s original description of WBDES.
+}
+
+\frame
+{
+\frametitle{An illustration of Chow \textit{et al.}'s white-box DES (2)}
+Assume the DES cipher $E^{k}(x)$ contains:
+
+\begin{itemize}
+\item  $n$ rounds $\pi^{k}_{i}$ for each $i = 1, \cdots, n$ with the key $k$. 
+
+\item $k_{i}$ denotes the $i$-th round subkey.
+
+\item $\lambda$ and $\lambda^{-1}$ denote the initial and the final permutations, which are called \textmd{IP} and \textmd{FP}, respectively.
+\end{itemize}
+
+Thus we have:
+\[E^{k}(x) :=[\lambda^{-1} \cdot \pi^{k_{n}}_{n} \cdot \pi^{k_{n-1}}_{n-1} \cdot \cdots \cdot \pi^{k_{1}}_{1} \cdot \lambda](x)\]
+}
+
+\frame
+{
+\frametitle{An illustration of Chow \textit{et al.}'s white-box DES (3)}
+$EP_{i}(x)$ returns the $i$-th block of DES expansion permutation on the input $x$, such that
+\begin{align}
+x_{1}x_{2}\cdots x_{n}|^{m}_{i} &= x_{i}x_{i+1} \cdots x_{i+m} \\
+x_{1}x_{2}\cdots x_{n}|_{i} &= x_{i} \\
+\nonumber \\
+EP_{i}(x) &= EP(x)|^{6}_{6i}\\
+\nonumber \\
+R'^{k}_{r} &= EP(R^{k}_{r})\\
+R'^{k}_{r,i} &= EP_{i}(R^{k}_{r})
+\end{align}
+}
+
+\frame
+{
+\frametitle{An illustration of Chow \textit{et al.}'s white-box DES (4)}
+The T-box $T^{k}_{r,i}(L_{r}, R'^{k}_{r})$ computes the $i$-th DES S-box in round $r$ for $i=0,1,2,\cdots,7$ and appends $R(L_{r}, R'^{k}_{r})$ which 
+takes the first and sixth bit from $R'^{k}_{r}$ and appends two random bits from $L_{r}$.
+
+\begin{align}
+T^{k}_{r,i}(L_{r}, R'^{k}_{r}) &= S^{k}_{r,i}(R'^{k}_{r,i})||R(L_{r}, R'^{k}_{r})\\
+T^{k}_{r}(L_{r}, R'^{k}_{r}) &= T^{k}_{r,\gamma(0)}(L_{r}, R'^{k}_{r})||T^{k}_{r,\gamma(1)}(L_{r}, R'^{k}_{r})||\cdots||T^{k}_{r,\gamma(11)}(L_{r}, R'^{k}_{r})
+\end{align}
+}
+
+
+\frame
+{
 \frametitle{(Dis)advantages of Chow \textit{et al}.'s white-box DES}
 \begin{itemize}
     \item Change DES from Feistel to WBDES into a SPN structure through bypassing encoding;
@@ -490,6 +541,7 @@ y_{0} &= ec(y_{3}) \\
 y_{1} &= 9a(y_{3}) \\
 y_{2} &= b7(y_{3})
 \end{align}
+\end{itemize}
 }
 
 \frame
