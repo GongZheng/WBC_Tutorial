@@ -4,6 +4,7 @@
 \usepackage{beamerthemesplit}
 \usepackage{tcolorbox}
 \usepackage{subfigure}
+\usepackage{algpseudocode}
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 5 Cryptanalysis}
 \author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
@@ -20,6 +21,20 @@
 
 \section[Outline]{}
 \frame{\tableofcontents}
+
+\section{The Obfuscated Encodings of White-Box Block Ciphers}
+\frame
+{
+\frametitle{The obfuscated encoding of white-box block ciphers}
+As well known, all published practical block ciphers are based on iterated round functions. The security of white-box block ciphers can be composed as the following \textit{obfuscated encoding layers}.
+\begin{enumerate}
+\item Obfuscated input/output encoding: for obfuscating input and output of a block cipher, thus adversary cannot mount chosen plain/ciphertext attacks directly.
+
+\item Obfuscated round boundary: for obfuscating the boundary between two connective rounds, which makes adversary hard to navigate the position of a wiretapped intermediate value (for which function/step it belongs to). 
+
+\item Obfuscated intermediate value: for obfuscating the input and output of a component of a block cipher's round function.
+\end{enumerate}
+}
 
 \section{Cryptanalysis of Chow \textit{et al.}'s White-box DES}
 \frame
@@ -83,8 +98,7 @@ On ACM DRM 2002, Jacob \textit{et al.} proposed a differential fault analysis on
 {
 \frametitle{The four steps of Jacob \textit{et al.}'s algorithm (2)}
 \textbf{2. Reconstruct:}
-\begin{enumerate}[(a)]
-\item For $i=1$ to $m$:
+(a) For $i=1$ to $m$:
 
 \begin{enumerate}[1)]
 \item Set $L_{n}=2^{i}$, $R_{n}=0$;
@@ -93,9 +107,28 @@ On ACM DRM 2002, Jacob \textit{et al.} proposed a differential fault analysis on
 \item For $j=1$ to $\frac{m}{4}$: If($\Delta(j) \neq 0$) $\rightarrow$ Set $\mathcal{O}(j)=\mathcal{O}(j) \cup {i}$;
 \end{enumerate}
 
-\item For $j=1$ to $m$:
-\end{enumerate}
 }
+
+%\frame
+%{
+%\frametitle{The four steps of Jacob \textit{et al.}'s algorithm (2)}
+%\textbf{2. Reconstruct:}
+%(b) For $j=1$ to $m$:
+%\begin{algorithmic}
+%\State Set $x =0$
+%\For{$k=1 to |\mathcal{O}(j)|$}
+%  \State Set $e[k]=0$
+%\EndFor
+%\State Set $\textit{pos}=0$
+%\State $X \Leftarrow X \times X$
+%  \State $N \Leftarrow \frac{N}{2} $  \Comment{This is a comment}
+%\ElsIf{$N$ is odd}
+%  \State $y \Leftarrow y \times X$
+%  \State $N \Leftarrow N - 1$
+%\EndIf
+%\EndFor
+%\end{algorithmic}
+%}
 
 \frame
 {
