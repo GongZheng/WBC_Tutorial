@@ -143,6 +143,21 @@ There are two practical problems of multi-operator encoding.
 \end{enumerate}
 }
 
+\frame
+{
+\frametitle{The multi-operator encoding with carries}
+Let $x, y \in \mathbb{F}^{8}_{2}$ and $x + y$ represents the modular addition operation on $\mathbb{F}^{8}_{2}$ as well. 
+\begin{itemize}
+\item The direct LUT method requires \textcolor{red} {$2^{2\times 8}\times 8 = 2^{16} \times 8$ bits storage}.
+\item We can use partition LUT method to replace the operation with a multi-operator encoding as follows.
+\end{itemize}
+\[ z_{2}||z_{1} = x_{7}x_{6}x_{5}x_{4}x_{3}x_{2}x_{1}x_{0} + y_{7}y_{6}y_{5}y_{4}y_{3}y_{2}y_{1}y_{0},\]
+\[ (z_{1}, c_{1}) = \mathcal{L}_{+}(x_{3}x_{2}x_{1}x_{0}, y_{3}y_{2}y_{1}y_{0}, c_{0}),\]
+\[ (z_{2},  c_{2})= \mathcal{L}_{+}(x_{7}x_{6}x_{5}x_{4}, y_{7}y_{6}y_{5}y_{4}, c_{1}).\]
+
+We note that $c_{i}$ denotes the carry of the $i$-th partition operation. Therefore, the storage of the above partition LUT method is reduced to \textcolor{red}{$2\times (2^{2\times 4 + 1} \times 4) = 2^9 \times 8$ bits}.
+}
+
 \section{White-box DES}
 \frame
 {
