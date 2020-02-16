@@ -2,7 +2,7 @@
 \usepackage{times}
 \usepackage{tikz}
 \usepackage{beamerthemesplit}
-\usepackage{tcolorbox}
+\usepackage{xcolor}
 \usepackage{subfigure}
 \usepackage{arydshln}
 
@@ -41,13 +41,15 @@ In the existing implementation methods of white-box block ciphers, there are sev
 From Chow \textit{et al.}'s white-box implementations of DES and AES, we can generalize the following framework.
 
 \begin{itemize}
-\item External encoding:
+\item \textcolor{red}{External encoding}: the outside encoding before the input of plaintext, which can either depend on secret key or not.
 
-\item Internal encoding:
+\item \textcolor{red}{Internal encoding}: the iteratively (keyed) encoding of the round functions. 
 \begin{itemize}
-\item Partial evaluation: for replacing substitution operations.
+\item \textcolor{blue}{Partial evaluation}: for replacing substitution operations, e.g., $T(x) = S(x \oplus k)$.
 
-\item Matrix partitioning: for replacing diffusion operations.
+\item \textcolor{blue}{Matrix partitioning}: for replacing diffusion operations, e.g., $y_{i} = MixColumns(x_{i,1}, x_{i,2}, x_{i,3}, x_{i,4})$.
+
+\item \textcolor{blue}{Multi-operator encoding}: for replacing multi-operator operations, e.g., $z = x \oplus y$.
 \end{itemize}
 \end{itemize}
 }
@@ -126,6 +128,19 @@ For $i = 1, 2, \cdots, a$, the matrix operations can be partitioned by
 
 \item each table $\mathcal{L}_{i,j}$ has a storage requirement of $2^{m}\cdot n$ bits.
 \end{itemize}
+}
+
+\frame
+{
+\frametitle{Multi-operator encoding}
+If an operation needs multiple operators, e.g., the XOR operation $z = x \oplus y$, we can represent the operation by the following LUT $\mathcal{L}_{\oplus}$.
+\[ \mathcal{L}_{\oplus}(x, y) = x \oplus y .\]
+
+There are two practical problems of multi-operator encoding. 
+\begin{enumerate}
+\item \colorbox{yellow}{The operation with carries}. For, modular addition operation $x + y$.
+\item \colorbox{yellow}{The size of LUT}. For example, two 4-bit operators $x \oplus y$ require a $2^{8}\times 4$ bits LUT.
+\end{enumerate}
 }
 
 \section{White-box DES}
