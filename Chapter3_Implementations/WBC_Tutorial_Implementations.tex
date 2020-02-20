@@ -158,6 +158,28 @@ Let $x, y \in \mathbb{F}^{8}_{2}$ and $x + y$ represents the modular addition op
 We note that $c_{i}$ denotes the carry of the $i$-th partition operation. Therefore, the storage of the above partition LUT method is reduced to \textcolor{red}{$2\times (2^{2\times 4 + 1} \times 4) = 2^9 \times 8$ bits}.
 }
 
+\frame
+{
+\frametitle{Encoded LUT}
+\noindent \textbf{Encoded lookup table}.  Let $\mathcal{L}$ denote a lookup table mapping $m$ bits to $n$ bits ($m \leq n$), and let $f$ and $g$ denote random bijective mappings on the vector space $\mathbb{F}^{m}_{2}$ and $\mathbb{F}^{n}_{2}$ respectively. Then $\mathcal{L}'$ is called the encoded version of $\mathcal{L}$ such that $\mathcal{L}' = g \circ \mathcal{L} \circ f^{-1}$, where $f^{-1}$ and $g$ are called input and output encoding respectively.
+}
+
+\frame
+{
+\frametitle{Networked encoding}
+\noindent \textbf{Networked encoding.} A \textit{networked encoding} for computing $\mathcal{L}_{Y} \circ \mathcal{L}_{X}$ where $\mathcal{L}_{X}$ and $\mathcal{L}_{Y}$ denote the lookup table representations of $X$ and $Y$ respectively) in an encoded form such that
+\[ \mathcal{L}'_{Y} \circ \mathcal{L}'_{X} = (h \circ \mathcal{L}_{Y} \circ g^{-1}) \circ (g \circ \mathcal{L}_{X} \circ f^{-1}) = h \circ (\mathcal{L}_{Y} \circ \mathcal{L}_{X}) \circ f^{-1}.\]
+
+Note that $\mathcal{L}'_{X}$ and $\mathcal{L}'_{Y}$ denote the encoded versions of $\mathcal{L}_{X}$ and $\mathcal{L}_{Y}$, respectively. We emphasize that the output encoding $g$ of $\mathcal{L}'_{X}$ and the input encoding $g^{-1}$ of $\mathcal{L}'_{Y}$ are pairwise annihilating.
+}
+
+\frame
+{
+\frametitle{XOR encoding}
+\noindent \textbf{XOR encoding.} Let $x \oplus c$ be a XOR operation such $c$ is a given value. We can execute the following LUT operations to compute $x \oplus c$ such that 
+\[G(x) = \bigoplus ^{n}_{i=1} G_{i} (x_{i}), where \ G_{i} = x_{i} \oplus c.\]
+}
+
 \section{White-box DES}
 \frame
 {
