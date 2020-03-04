@@ -1,7 +1,7 @@
 \documentclass{beamer}
 \usepackage{times}
 \usepackage{tikz}
-\usepackage{beamerthemesplit} 
+\usepackage{beamerthemesplit}
 \usepackage{tcolorbox}
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 2 Notions and Definitions}
@@ -24,7 +24,7 @@
 \frame
 {
   \frametitle{The categories of white-box crypto: from crypto side}
-  
+
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item symmetric-key
@@ -48,17 +48,17 @@
 \frame
 {
   \frametitle{The categories of white-box crypto: from white-box side}
-  
+
   \begin{itemize}
   \setlength{\itemsep}{12pt}
-  \item key escrow resisntance:
+  \item key escrow resistance:
   \begin{itemize}
    \setlength{\itemsep}{6pt}
   \item \textcolor{red}{Standalone protection}: N-SPACE, SPNBox
   \item \textcolor{red}{Server-aided protection}: Cloud signature
   \item \textcolor{red}{Complexity hardness}: Chow et al.'s seminal work
   \end{itemize}
-  
+
   \item Code lifting resistance:
   \begin{itemize}
     \setlength{\itemsep}{6pt}
@@ -66,10 +66,10 @@
   \item Watermarking
   \item Tamper-proofing
   \end{itemize}
-   
+
   \end{itemize}
-  
-  
+
+
 }
 
 \section{Recall weak/strong white-box security notions}
@@ -84,7 +84,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
- 
+
     \begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -105,7 +105,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -121,14 +121,14 @@
 \frametitle{The shortcomings of traditional crypto model}
 \begin{itemize}
  \setlength{\itemsep}{12pt}
- 
- \item In the traditional crypto model, e.g., chosen-plaintext/ciphertext attacks, are defined for protecting Kerckhoff's principle. The security goal is just to 
+
+ \item In the traditional crypto model, e.g., chosen-plaintext/ciphertext attacks, are defined for protecting Kerckhoff's principle. The security goal is just to
  protect the function (signing, decrypting, etc.)
- 
+
  \item In the white-box security model, attackers already have the ability to use the keyed function, therefore the goal is moved to protect the secrete key or the integrity of the function (not the function itself)!
- 
- \item How to define this security model and goal is a challenging work! 
- 
+
+ \item How to define this security model and goal is a challenging work!
+
 \end{itemize}
 
 }
@@ -141,7 +141,7 @@
 
 \begin{itemize}
 \item Michiels and Gorissen [DRM'07] proposed a method to protect the integrity of software which depends on the correct operation of the white-box implementation of a block cipher.
-\item If an attacker modifies the software, the white-box implementation stops decrypting/encrypting properly. 
+\item If an attacker modifies the software, the white-box implementation stops decrypting/encrypting properly.
 \begin{tcolorbox}[title=security goal]
 \item The proposed method assume that it is the goal of an attacker to modify the protected software without losing the ability to decrypt/encrypt properly.
 \end{tcolorbox}
@@ -156,7 +156,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/DRM.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -173,9 +173,9 @@
 \frametitle{The threat model of Michiels and Gorissen's proposal}
 \begin{enumerate}
 \setlength{\itemsep}{12pt}
-\item A DRM client that is implemented in software and that has to validate conditions in a DRM license before it decrypts the corresponding content. \item The content can be encrypted by AES as this block cipher allows a white-box implementation, which may only be decrypted during a specific time window. 
-\item An attacker may try to get around the license by tampering with the program code that verifies the license. 
-\item We need not only protect the license verification routine, but also (part of) the software that calls this routine. 
+\item A DRM client that is implemented in software and that has to validate conditions in a DRM license before it decrypts the corresponding content. \item The content can be encrypted by AES as this block cipher allows a white-box implementation, which may only be decrypted during a specific time window.
+\item An attacker may try to get around the license by tampering with the program code that verifies the license.
+\item We need not only protect the license verification routine, but also (part of) the software that calls this routine.
 \end{enumerate}
 }
 
@@ -184,8 +184,8 @@
 \frametitle{The steps of Michiels and Gorissen's proposal}
 \begin{enumerate}
 \setlength{\itemsep}{12pt}
-\item Let B be the binary of the software that we want to protect. 
-\item Binary B can be linked and compiled code obtained from higher lever source code, such as C, but it can also be the binary representation of interpreted code, such as byte code in Java. 
+\item Let B be the binary of the software that we want to protect.
+\item Binary B can be linked and compiled code obtained from higher lever source code, such as C, but it can also be the binary representation of interpreted code, such as byte code in Java.
 \item As binary B is just a string of bits, we can also interpret it as a collection of lookup tables. A code fragment of 1024 bytes can, for instance, be interpreted as a lookup table consisting of 256 rows of 4 bytes.
 \end{enumerate}
 }
@@ -229,7 +229,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=2.1cm]{./pics/Level1.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -248,7 +248,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level2.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -267,7 +267,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level3.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -286,7 +286,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=4cm]{./pics/Level4.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -309,6 +309,34 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 
 \item Only for Chinese commercial cryptographic schemes and protocols (SM1/2/3/4/9 series)
 
+\end{itemize}
+}
+
+\section{Our Attempt on Security Framework for WBC}
+
+\frame{
+\frametitle{The problems of the existing security notions and definitions}
+In literature, various security notions and definitions have been proposed for WBC. But they also have the following problems.
+
+\begin{itemize}
+\item \textbf{Inaccuracy.} For example, Chow \textit{et al.} proposed \textcolor{red}{local security} to describe the ambiguity of keyed LUT. But this property might be insufficient for the security of a WBC implementation.
+
+\item \textbf{Misappropriation.} \textcolor{red}{code lifting} is a requirement of high-level application based on WBC, e.g., DRM applications require the binary codes are device-binding. It might not be self-contented by a WBC algorithm, but a combined security property which is supported by algorithm design, implementation, code obfuscation and trusted computing base.
+
+\end{itemize} 
+}
+
+\frame{
+\frametitle{Ourt attempt on Security Framework for WBC}
+To achieve a concrete security framework for WBC with better accuracy and appropriation, we consider the security framework from a layered view.
+
+\begin{itemize}
+\item \textcolor{red}{\textbf{Black-Box Primitive Security.}} For WBC security notions, first we need to consist with the security framework of its black-box securities, such as differential and linear cryptanalysis resistance. It is obvious that the security notions on the primitive of a WBC, e.g., AES security in the Chow \textit{et al.} WBAES, definitely should be considered.
+ 
+\item \textcolor{red}{\textbf{White-Box Implementation Security.}} For a WBC implementation, it should obey its security requirements which are defined in the white-box context. For example, the white-box key recovery attacks, the differential fault analysis, and so on.
+
+
+\item \textcolor{red}{\textbf{White-Box Application Security.}} Even a WBC implementation is secure on both of its black-box primitive and carefully implemented in the application. It might be still not provide enough security for certain applications. E.g., the space-hardness proposals \textcolor{blue}{SPACE} and \textcolor{blue}{SPNBox} are proven secure under the white-box security model. But they cannot provide code-lifting protection which is necessary in DRM applications.
 \end{itemize}
 }
 
@@ -338,7 +366,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=4cm, height=4cm]{./pics/WBC_BG.png}};
- 
+
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
