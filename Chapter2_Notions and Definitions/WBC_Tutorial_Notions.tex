@@ -387,6 +387,64 @@ To achieve a concrete security framework for WBC with better accuracy and approp
 \end{itemize}
 }
 
+\frame{
+\frametitle{Our Attempt on Practical Security Framework for WBC}
+\begin{itemize}
+\item \textcolor{red}{key-dependent security}: focus on security notions related to key-dependent problems and outcomes.
+\newline
+
+\item \textcolor{red}{Algorithm-related security}: problems that independent from key escrow but the security of the algorithm itself.
+\newline
+
+\item \textcolor{red}{Application-level security}: The application have implemented a WBC algorithm which satisfies the key-dependent and algorithm-related security notions, yet still fails on its security notions.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Key-dependent security notions}
+\begin{itemize}
+\item \textcolor{red}{Key recovery attack}: the attacker recovers the exact secret key from a WBC implementation.
+\newline
+
+\item \textcolor{red}{Equivalent-key recovery attack}: the attacker recovers an equivalent (but not the original) secret key from a WBC implementation.
+\newline
+
+\item \textcolor{red}{Key distinguishing attack}: Given two key instantiations $WBK_{1}$ and $WBK_{2}$ from a WBC, the attacker can distinguish their original secret keys $K_{1}$ and $K_{2}$ respectively.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Algorithm-related security notions (1)}
+\begin{itemize}
+\item \textcolor{red}{One-wayness attack}: the one-wayness of a WBC algorithm can be manipulated by attacker, e.g., given WBC encryption $E$, the attacker can derive the decryption function $E^{-1}$.
+\newline
+
+\item \textcolor{red}{Equivalent algorithm attack}: Given a WBC algorithm $E$, the attacker can deduce an equivalent algorithm $E'$ with the same functionality.
+
+\end{itemize}
+}
+
+\frame{
+\frametitle{Algorithm-related security notions (2)}
+\begin{itemize}
+\item \textcolor{red}{Incompressiibility}: Given a WBC algorithm $E$, the attacker can deduce a more efficient algorithm $E'$ with the same functionality.
+\newline
+
+\item \textcolor{red}{Algorithm-distinguishing attack}: Given two WBC algorithms $E_{1}$ and $E_{2}$, the attacker can distinguish which one is implemented.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Application-level security notions}
+\begin{itemize}
+\item \textcolor{red}{Code-lifting}: Given a WBC instantiated ($E$) application, the attacker can lift $E$ to another application.
+\newline
+
+\item \textcolor{red}{Traceability}: Given two WBC instantiated ($E_{1}$ and $E_{2}$) applicaitons, the attacker can trace $E_{1}$ or $E_{2}$.
+
+\end{itemize}
+}
+
 
 \section{Conclusion}
 
