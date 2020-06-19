@@ -4,6 +4,7 @@
 \usepackage{beamerthemesplit}
 \usepackage{tcolorbox}
 \usepackage{subfigure}
+\usepackage{arydshln}
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 3 Implementations}
 \author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
@@ -20,6 +21,112 @@
 
 \section[Outline]{}
 \frame{\tableofcontents}
+
+\section{General backgroud}
+\frame
+{
+In the existing implementation methods of white-box block ciphers, there are several proposals.
+\begin{itemize}
+\item Look-up table (LUT) based method;
+
+\item Dual-cipher based method;
+
+\item Affine function based method;
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{The framework of Chow \textit{et al.}'s white-box implementation}
+From Chow \textit{et al.}'s white-box implementations of DES and AES, we can generalize the following framework.
+
+\begin{itemize}
+\item External encoding:
+
+\item Internal encoding:
+\begin{itemize}
+\item Partial evaluation: for replacing substitution operations.
+
+\item Matrix partitioning: for replacing diffusion operations.
+\end{itemize}
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Partial evaluation}
+Let $S$ be the sbox which is used in block cipher $\mathbb{C}$, the partial evaluation is defined as follows.\\
+\[T: \mathbb{F}^{m}_{2} \rightarrow \mathbb{F}^{n}_{2}: x \longmapsto T(x) = S(x \oplus k).\]
+}
+
+\frame
+{
+\frametitle{Matrix partitioning}
+\begin{itemize}
+\item For \textit{wide} linear/affine mappings, where `wide' refers to an input size of the mapping larger than 16 bits, it quickly becomes impractical to represent by a single LUT. (Consider MixColumns in AES, which uses a 32-to-8 bits matrix-vector multiplication.)
+
+\item Therefore, the matrix-vector multiplication should be decomposed into an exclusive-OR network of smaller LUTs by partitioning the matrix and input/output vectors accordingly.
+\end{itemize}
+
+}
+
+\frame
+{
+\frametitle{Matrix partitioning}
+Let $y = L \cdot x \oplus c$ with $y, c \in \mathbb{F}^{an}_{2}$, $L \in \mathbb{F}^{an\times bm}_{2}$ and $x \in \mathbb{F}^{bm}_{2}$. The partition can be executed as follows.
+\[
+    \begin{bmatrix} % or pmatrix or bmatrix or Bmatrix or ...
+    \begin{array}{c}
+      y_{1}  \\ 
+      \hdashline
+      \vdots \\
+      \hdashline
+      y_{a} \\
+      \end{array}
+   \end{bmatrix} = 
+   \begin{bmatrix}% or pmatrix or bmatrix or Bmatrix or ...
+   \begin{array}{c : c : c}
+      L_{1, 1} & \cdots & L_{1, b}  \\ 
+      \hdashline
+      \vdots & \ddots & \vdots \\
+      \hdashline
+      L_{a, 1} & \cdots & L_{a, b} \\
+      \end{array}
+   \end{bmatrix} 
+   \cdot 
+   \begin{bmatrix}% or pmatrix or bmatrix or Bmatrix or ...
+   \begin{array}{c}
+   x_{1} \\
+   \hdashline
+   \vdots \\
+   x_{b} \\
+   \end{array}
+   \end{bmatrix}
+   \oplus
+      \begin{bmatrix}% or pmatrix or bmatrix or Bmatrix or ...
+   \begin{array}{c}
+   c_{1} \\
+   \hdashline
+   \vdots \\
+   c_{a} \\
+   \end{array}
+   \end{bmatrix}
+.\]
+
+}
+
+\frame
+{
+\frametitle{Matrix patition}
+For $i = 1, 2, \cdots, a$, the matrix operations can be partitioned by
+\[ y_{i} = (\bigoplus^{b-1}_{j=1} \underbrace{L_{i,j} \cdot x_{j}}_{\mathcal{L}_{i,j}}) \oplus \underbrace{(L_{i, b} \cdot x_{b}) \oplus c_{i}}_{\mathcal{L}_{i,b}}.\]
+
+\begin{itemize}
+\item the expression $y=L\cdot x \oplus c$ is represented by an exclusive-OR network of $a\times b$ smaller LUTs;
+
+\item each table $\mathcal{L}_{i,j}$ has a storage requirement of $2^{m}\cdot n$ bits.
+\end{itemize}
+}
 
 \section{White-box DES}
 \frame
@@ -46,7 +153,7 @@
 \end{center}
 }
 
-\subsection{Terminology and Notion}
+\subsection{Terminology and notions}
 
 \frame
 {
