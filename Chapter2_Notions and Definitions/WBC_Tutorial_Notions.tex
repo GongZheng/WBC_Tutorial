@@ -75,7 +75,7 @@
 \section{Recall weak/strong white-box security notions}
 \frame
 {
-\frametitle{Basic security definitions for white-box crypto (1)}
+\frametitle{Basic security definitions for WBC (Chow \textit{et al.})}
 \begin{itemize}
 \item In SAC 2002, the security notions have  been informally described for white-box cryptography by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}
 \end{itemize}
@@ -97,7 +97,7 @@
 
 \frame
 {
-\frametitle{Basic security definitions for white-box crypto(2)}
+\frametitle{Basic security definitions for WBC (Biryukov \textit{et al.})}
 \begin{itemize}
 \item For more general security, \textcolor{red}{the strong white-box security} has been defined by Chow et al.
 \end{itemize}
@@ -114,6 +114,17 @@
     %\end{scope}
 \end{tikzpicture}
 \end{center}
+}
+
+\frame
+{
+\frametitle{Basic security definitions for WBC (3)}
+\begin{definition}(\textcolor{red}{Secret key recovery (KR)}). A white-box implementation of a key-instantiated block cipher $E_{k}$ (or $D_{k}$) is called \textit{KR-insecure} if an attacker extracts the secret key $k$ and furthermore has access to the plaintext $P$.
+\end{definition}
+
+\begin{definition}
+(\textcolor{red}{White-box key recovery (KR)}). A white-box implementation of an encoded version of a key-instantiated block cipher $E_{k}$ (or $D_{k}$) is called \textit{WBKR-insecure} if the attacker extracts the secret key $k$ and the inverse mappings of the applied external encodings.
+\end{definition}
 }
 
 \frame

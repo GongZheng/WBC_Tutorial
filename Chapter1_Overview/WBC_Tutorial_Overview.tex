@@ -1,8 +1,15 @@
 \documentclass{beamer}
 \usepackage{times}
 \usepackage{tikz}
-\usepackage{beamerthemesplit}
-
+%\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+%Load useful packages
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{subcaption}
+\usepackage{subfiles}
+\usepackage{url}
+\usepackage{amssymb}
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 1 Overview}
 \author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
@@ -210,7 +217,8 @@ In practice, many kinds of hardware are used to protect software \textcolor[rgb]
 \frametitle{A typical white-box block cipher in a nutshell}
 \begin{figure}[htbp]
 \centering
-  \includegraphics[width=4.8cm]{./pics/WBCrypto_Functional_Model.jpg}
+  \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
+
 \end{figure}
 
 }
