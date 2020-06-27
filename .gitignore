@@ -8,3 +8,5 @@
 *.log
 *.aux
 *.sav
+*.bbl
+*.blg
