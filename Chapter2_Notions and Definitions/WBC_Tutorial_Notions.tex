@@ -1,7 +1,7 @@
 \documentclass{beamer}
 \usepackage{times}
 \usepackage{tikz}
-\usepackage{beamerthemesplit}
+\usepackage{beamerthemesplit} 
 \usepackage{tcolorbox}
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 2 Notions and Definitions}
@@ -24,7 +24,7 @@
 \frame
 {
   \frametitle{The categories of white-box crypto: from crypto side}
-
+  
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item symmetric-key
@@ -48,17 +48,17 @@
 \frame
 {
   \frametitle{The categories of white-box crypto: from white-box side}
-
+  
   \begin{itemize}
   \setlength{\itemsep}{12pt}
-  \item key escrow resistance:
+  \item key escrow resisntance:
   \begin{itemize}
    \setlength{\itemsep}{6pt}
   \item \textcolor{red}{Standalone protection}: N-SPACE, SPNBox
   \item \textcolor{red}{Server-aided protection}: Cloud signature
   \item \textcolor{red}{Complexity hardness}: Chow et al.'s seminal work
   \end{itemize}
-
+  
   \item Code lifting resistance:
   \begin{itemize}
     \setlength{\itemsep}{6pt}
@@ -66,16 +66,16 @@
   \item Watermarking
   \item Tamper-proofing
   \end{itemize}
-
+   
   \end{itemize}
-
-
+  
+  
 }
 
 \section{Recall weak/strong white-box security notions}
 \frame
 {
-\frametitle{Basic security definitions for white-box crypto (1)}
+\frametitle{Basic security definitions for WBC (Chow \textit{et al.})}
 \begin{itemize}
 \item In SAC 2002, the security notions have  been informally described for white-box cryptography by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}
 \end{itemize}
@@ -84,7 +84,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
-
+ 
     \begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -97,7 +97,7 @@
 
 \frame
 {
-\frametitle{Basic security definitions for white-box crypto(2)}
+\frametitle{Basic security definitions for WBC (Biryukov \textit{et al.})}
 \begin{itemize}
 \item For more general security, \textcolor{red}{the strong white-box security} has been defined by Chow et al.
 \end{itemize}
@@ -105,7 +105,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -118,17 +118,28 @@
 
 \frame
 {
+\frametitle{Basic security definitions for WBC (3)}
+\begin{definition}(\textcolor{red}{Secret key recovery (KR)}). A white-box implementation of a key-instantiated block cipher $E_{k}$ (or $D_{k}$) is called \textit{KR-insecure} if an attacker extracts the secret key $k$ and furthermore has access to the plaintext $P$.
+\end{definition}
+
+\begin{definition}
+(\textcolor{red}{White-box key recovery (KR)}). A white-box implementation of an encoded version of a key-instantiated block cipher $E_{k}$ (or $D_{k}$) is called \textit{WBKR-insecure} if the attacker extracts the secret key $k$ and the inverse mappings of the applied external encodings.
+\end{definition}
+}
+
+\frame
+{
 \frametitle{The shortcomings of traditional crypto model}
 \begin{itemize}
  \setlength{\itemsep}{12pt}
-
- \item In the traditional crypto model, e.g., chosen-plaintext/ciphertext attacks, are defined for protecting Kerckhoff's principle. The security goal is just to
+ 
+ \item In the traditional crypto model, e.g., chosen-plaintext/ciphertext attacks, are defined for protecting Kerckhoff's principle. The security goal is just to 
  protect the function (signing, decrypting, etc.)
-
+ 
  \item In the white-box security model, attackers already have the ability to use the keyed function, therefore the goal is moved to protect the secrete key or the integrity of the function (not the function itself)!
-
- \item How to define this security model and goal is a challenging work!
-
+ 
+ \item How to define this security model and goal is a challenging work! 
+ 
 \end{itemize}
 
 }
@@ -141,7 +152,7 @@
 
 \begin{itemize}
 \item Michiels and Gorissen [DRM'07] proposed a method to protect the integrity of software which depends on the correct operation of the white-box implementation of a block cipher.
-\item If an attacker modifies the software, the white-box implementation stops decrypting/encrypting properly.
+\item If an attacker modifies the software, the white-box implementation stops decrypting/encrypting properly. 
 \begin{tcolorbox}[title=security goal]
 \item The proposed method assume that it is the goal of an attacker to modify the protected software without losing the ability to decrypt/encrypt properly.
 \end{tcolorbox}
@@ -156,7 +167,7 @@
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/DRM.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -173,9 +184,9 @@
 \frametitle{The threat model of Michiels and Gorissen's proposal}
 \begin{enumerate}
 \setlength{\itemsep}{12pt}
-\item A DRM client that is implemented in software and that has to validate conditions in a DRM license before it decrypts the corresponding content. \item The content can be encrypted by AES as this block cipher allows a white-box implementation, which may only be decrypted during a specific time window.
-\item An attacker may try to get around the license by tampering with the program code that verifies the license.
-\item We need not only protect the license verification routine, but also (part of) the software that calls this routine.
+\item A DRM client that is implemented in software and that has to validate conditions in a DRM license before it decrypts the corresponding content. \item The content can be encrypted by AES as this block cipher allows a white-box implementation, which may only be decrypted during a specific time window. 
+\item An attacker may try to get around the license by tampering with the program code that verifies the license. 
+\item We need not only protect the license verification routine, but also (part of) the software that calls this routine. 
 \end{enumerate}
 }
 
@@ -184,8 +195,8 @@
 \frametitle{The steps of Michiels and Gorissen's proposal}
 \begin{enumerate}
 \setlength{\itemsep}{12pt}
-\item Let B be the binary of the software that we want to protect.
-\item Binary B can be linked and compiled code obtained from higher lever source code, such as C, but it can also be the binary representation of interpreted code, such as byte code in Java.
+\item Let B be the binary of the software that we want to protect. 
+\item Binary B can be linked and compiled code obtained from higher lever source code, such as C, but it can also be the binary representation of interpreted code, such as byte code in Java. 
 \item As binary B is just a string of bits, we can also interpret it as a collection of lookup tables. A code fragment of 1024 bytes can, for instance, be interpreted as a lookup table consisting of 256 rows of 4 bytes.
 \end{enumerate}
 }
@@ -229,7 +240,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=2.1cm]{./pics/Level1.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -248,7 +259,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level2.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -267,7 +278,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level3.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -286,7 +297,7 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=4cm]{./pics/Level4.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
@@ -308,139 +319,6 @@ In FIPS 140-2, 4 security levels are defined for cryptographic modules to be eva
 \item Add Security Level 2+ and 3+ to fix the gap between software and hardware security assurances.
 
 \item Only for Chinese commercial cryptographic schemes and protocols (SM1/2/3/4/9 series)
-
-\end{itemize}
-}
-
-\section{Our Attempt on Security Framework for WBC}
-
-\frame{
-\frametitle{The problems of the existing security notions and definitions}
-In literature, various security notions and definitions have been proposed for WBC. But they also have the following problems.
-
-\begin{itemize}
-\item \textbf{Inaccuracy.}
-
-\item \textbf{Unsatisfactory.}
-
-\end{itemize}
-}
-
-\frame
-{
-\frametitle{Inaccuracy of the existing WBC security framework}
- For example, Chow \textit{et al.} proposed \textcolor{red}{local security} to describe the ambiguity of keyed LUT. But this property might be insufficient for the security of a WBC implementation.
-}
-
-\frame
-{
-\frametitle{Unsatisfactory of the existing WBC security framework}
-
-\begin{itemize}
-\item \textcolor{red}{code lifting} is a requirement of high-level application based on WBC, e.g., DRM applications require the binary codes are device-binding. 
-
-\item It might not be self-contented by a WBC algorithm, but a combined security property which is supported by algorithm design, implementation, code obfuscation and trusted computing base.
-\end{itemize}
-}
-
-\frame{
-\frametitle{Ourt attempt on Security Framework for WBC}
-To achieve a concrete security framework for WBC with better accuracy and appropriation, we consider the security framework from a layered view.
-
-\begin{itemize}
-\item \textcolor{red}{\textbf{Black-Box Primitive Security.}} 
-
-\item \textcolor{red}{\textbf{White-Box Implementation Security.}} 
-
-
-\item \textcolor{red}{\textbf{White-Box Application Security.}} 
-\end{itemize}
-}
-
-\frame{
-\frametitle{Black-Box Primitive Security}
-
-\begin{itemize}
-\item For WBC security notions, first we need to consist with the security framework of its black-box securities, such as differential and linear cryptanalysis resistance.
-
-\item It is obvious that the security notions on the primitive of a WBC, e.g., AES security in the Chow \textit{et al.} WBAES, definitely should be considered.
-
-\end{itemize}
-}
-
-\frame{
-\frametitle{White-Box Implementation Security}
-\begin{itemize}
-\item For a WBC implementation, it should obey its security requirements which are defined in the white-box context. 
-
-\item For example, the white-box key recovery attacks, the differential fault analysis, and so on.
-\end{itemize}
-}
-
-\frame{
-\frametitle{White-Box Application Security}
-\begin{itemize}
-\item Even a WBC implementation is secure on both of its black-box primitive and carefully implemented in the application. It might be still not provide enough security for certain applications. 
-    
-\item E.g., the space-hardness proposals \textcolor{blue}{SPACE} and \textcolor{blue}{SPNBox} are proven secure under the white-box security model. But they cannot provide code-lifting protection which is necessary in DRM applications.
-
-\end{itemize}
-}
-
-\frame{
-\frametitle{Our Attempt on Practical Security Framework for WBC}
-\begin{itemize}
-\item \textcolor{red}{key-dependent security}: focus on security notions related to key-dependent problems and outcomes.
-\newline
-
-\item \textcolor{red}{Algorithm-related security}: problems that independent from key escrow but the security of the algorithm itself.
-\newline
-
-\item \textcolor{red}{Application-level security}: The application have implemented a WBC algorithm which satisfies the key-dependent and algorithm-related security notions, yet still fails on its security notions.
-\end{itemize}
-}
-
-\frame{
-\frametitle{Key-dependent security notions}
-\begin{itemize}
-\item \textcolor{red}{Key recovery attack}: the attacker recovers the exact secret key from a WBC implementation.
-\newline
-
-\item \textcolor{red}{Equivalent-key recovery attack}: the attacker recovers an equivalent (but not the original) secret key from a WBC implementation.
-\newline
-
-\item \textcolor{red}{Key distinguishing attack}: Given two key instantiations $WBK_{1}$ and $WBK_{2}$ from a WBC, the attacker can distinguish their original secret keys $K_{1}$ and $K_{2}$ respectively.
-\end{itemize}
-}
-
-\frame{
-\frametitle{Algorithm-related security notions (1)}
-\begin{itemize}
-\item \textcolor{red}{One-wayness attack}: the one-wayness of a WBC algorithm can be manipulated by attacker, e.g., given WBC encryption $E$, the attacker can derive the decryption function $E^{-1}$.
-\newline
-
-\item \textcolor{red}{Equivalent algorithm attack}: Given a WBC algorithm $E$, the attacker can deduce an equivalent algorithm $E'$ with the same functionality.
-
-\end{itemize}
-}
-
-\frame{
-\frametitle{Algorithm-related security notions (2)}
-\begin{itemize}
-\item \textcolor{red}{Incompressiibility}: Given a WBC algorithm $E$, the attacker can deduce a more efficient algorithm $E'$ with the same functionality.
-\newline
-
-\item \textcolor{red}{Algorithm-distinguishing attack}: Given two WBC algorithms $E_{1}$ and $E_{2}$, the attacker can distinguish which one is implemented.
-\end{itemize}
-}
-
-\frame{
-\frametitle{Application-level security notions}
-\begin{itemize}
-\item \textcolor{red}{Code-lifting}: Given a WBC instantiated ($E$) application, the attacker can lift $E$ to another application.
-\newline
-
-\item \textcolor{red}{Traceability}: Given two WBC instantiated ($E_{1}$ and $E_{2}$) applicaitons, the attacker can trace $E_{1}$ or $E_{2}$.
 
 \end{itemize}
 }
@@ -471,7 +349,7 @@ To achieve a concrete security framework for WBC with better accuracy and approp
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=4cm, height=4cm]{./pics/WBC_BG.png}};
-
+ 
     %\begin{scope}[x={(image.south east)},y={(image.north west)}]
         %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
         %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }

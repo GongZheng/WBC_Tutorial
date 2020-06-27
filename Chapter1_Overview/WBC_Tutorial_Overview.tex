@@ -1,8 +1,15 @@
 \documentclass{beamer}
 \usepackage{times}
 \usepackage{tikz}
-\usepackage{beamerthemesplit}
-
+%\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+%Load useful packages
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{subcaption}
+\usepackage{subfiles}
+\usepackage{url}
+\usepackage{amssymb}
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 1 Overview}
 \author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
@@ -180,7 +187,7 @@
 \item \textcolor[rgb]{1.00, 0.00, 0.00}{BORE (Break Once Run Everywhere) attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Online/Offline registration verification}
 \end{itemize}
 
-In direct usage, \textcolor[rgb]{1.00, 0.00, 0.00}{white-box cryptography} can only solve the key recovery attacks and diversity problems. But it might be a building 
+In direct usage, \textcolor[rgb]{1.00, 0.00, 0.00}{white-box cryptography} can only solve the key recovery attacks and diversity problems. But it might be a building
 block for supporting code obfuscation, tamper resistance, software diversity and registration verification protection.
 }
 
@@ -204,6 +211,18 @@ In practice, many kinds of hardware are used to protect software \textcolor[rgb]
 
 \end{columns}
 }
+
+\frame
+{
+\frametitle{A typical white-box block cipher in a nutshell}
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
+
+\end{figure}
+
+}
+
 
 \frame
 {
@@ -346,6 +365,8 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 
 }
 
+
+
 \frame
 {
 \frametitle{Basic security definitions for white-box crypto (1)}
@@ -388,6 +409,8 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \end{tikzpicture}
 \end{center}
 }
+
+\section{The State-of-the-art of WBC}
 
 \section{Conclusion}
 

@@ -2,7 +2,7 @@
 \usepackage{times}
 \usepackage{tikz}
 \usepackage{beamerthemesplit}
-\usepackage{xcolor}
+\usepackage{tcolorbox}
 \usepackage{subfigure}
 \usepackage{arydshln}
 
@@ -41,15 +41,13 @@ In the existing implementation methods of white-box block ciphers, there are sev
 From Chow \textit{et al.}'s white-box implementations of DES and AES, we can generalize the following framework.
 
 \begin{itemize}
-\item \textcolor{red}{External encoding}: the outside encoding before the input of plaintext, which can either depend on secret key or not.
+\item External encoding:
 
-\item \textcolor{red}{Internal encoding}: the iteratively (keyed) encoding of the round functions. 
+\item Internal encoding:
 \begin{itemize}
-\item \textcolor{blue}{Partial evaluation}: for replacing substitution operations, e.g., $T(x) = S(x \oplus k)$.
+\item Partial evaluation: for replacing substitution operations.
 
-\item \textcolor{blue}{Matrix partitioning}: for replacing diffusion operations, e.g., $y_{i} = MixColumns(x_{i,1}, x_{i,2}, x_{i,3}, x_{i,4})$.
-
-\item \textcolor{blue}{Multi-operator encoding}: for replacing multi-operator operations, e.g., $z = x \oplus y$.
+\item Matrix partitioning: for replacing diffusion operations.
 \end{itemize}
 \end{itemize}
 }
@@ -128,56 +126,6 @@ For $i = 1, 2, \cdots, a$, the matrix operations can be partitioned by
 
 \item each table $\mathcal{L}_{i,j}$ has a storage requirement of $2^{m}\cdot n$ bits.
 \end{itemize}
-}
-
-\frame
-{
-\frametitle{Multi-operator encoding}
-If an operation needs multiple operators, e.g., the XOR operation $z = x \oplus y$, we can represent the operation by the following LUT $\mathcal{L}_{\oplus}$.
-\[ \mathcal{L}_{\oplus}(x, y) = x \oplus y .\]
-
-There are two practical problems of multi-operator encoding. 
-\begin{enumerate}
-\item \colorbox{yellow}{The operation with carries}. For, modular addition operation $x + y$.
-\item \colorbox{yellow}{The size of LUT}. For example, two 4-bit operators $x \oplus y$ require a $2^{8}\times 4$ bits LUT.
-\end{enumerate}
-}
-
-\frame
-{
-\frametitle{The multi-operator encoding with carries}
-Let $x, y \in \mathbb{F}^{8}_{2}$ and $x + y$ represents the modular addition operation on $\mathbb{F}^{8}_{2}$ as well. 
-\begin{itemize}
-\item The direct LUT method requires \textcolor{red} {$2^{2\times 8}\times 8 = 2^{16} \times 8$ bits storage}.
-\item We can use partition LUT method to replace the operation with a multi-operator encoding as follows.
-\end{itemize}
-\[ z_{2}||z_{1} = x_{7}x_{6}x_{5}x_{4}x_{3}x_{2}x_{1}x_{0} + y_{7}y_{6}y_{5}y_{4}y_{3}y_{2}y_{1}y_{0},\]
-\[ (z_{1}, c_{1}) = \mathcal{L}_{+}(x_{3}x_{2}x_{1}x_{0}, y_{3}y_{2}y_{1}y_{0}, c_{0}),\]
-\[ (z_{2},  c_{2})= \mathcal{L}_{+}(x_{7}x_{6}x_{5}x_{4}, y_{7}y_{6}y_{5}y_{4}, c_{1}).\]
-
-We note that $c_{i}$ denotes the carry of the $i$-th partition operation. Therefore, the storage of the above partition LUT method is reduced to \textcolor{red}{$2\times (2^{2\times 4 + 1} \times 4) = 2^9 \times 8$ bits}.
-}
-
-\frame
-{
-\frametitle{Encoded LUT}
-\noindent \textbf{Encoded lookup table}.  Let $\mathcal{L}$ denote a lookup table mapping $m$ bits to $n$ bits ($m \leq n$), and let $f$ and $g$ denote random bijective mappings on the vector space $\mathbb{F}^{m}_{2}$ and $\mathbb{F}^{n}_{2}$ respectively. Then $\mathcal{L}'$ is called the encoded version of $\mathcal{L}$ such that $\mathcal{L}' = g \circ \mathcal{L} \circ f^{-1}$, where $f^{-1}$ and $g$ are called input and output encoding respectively.
-}
-
-\frame
-{
-\frametitle{Networked encoding}
-\noindent \textbf{Networked encoding.} A \textit{networked encoding} for computing $\mathcal{L}_{Y} \circ \mathcal{L}_{X}$ where $\mathcal{L}_{X}$ and $\mathcal{L}_{Y}$ denote the lookup table representations of $X$ and $Y$ respectively) in an encoded form such that
-\[ \mathcal{L}'_{Y} \circ \mathcal{L}'_{X} = (h \circ \mathcal{L}_{Y} \circ g^{-1}) \circ (g \circ \mathcal{L}_{X} \circ f^{-1}) = h \circ (\mathcal{L}_{Y} \circ \mathcal{L}_{X}) \circ f^{-1}.\]
-
-Note that $\mathcal{L}'_{X}$ and $\mathcal{L}'_{Y}$ denote the encoded versions of $\mathcal{L}_{X}$ and $\mathcal{L}_{Y}$, respectively. We emphasize that the output encoding $g$ of $\mathcal{L}'_{X}$ and the input encoding $g^{-1}$ of $\mathcal{L}'_{Y}$ are pairwise annihilating.
-}
-
-\frame
-{
-\frametitle{XOR encoding}
-\noindent \textbf{XOR encoding.} Let $x \oplus c$ be a XOR operation such $c$ is a given value. We can execute the following LUT operations to compute $x \oplus c$ such that 
-\[G(x) = \bigoplus ^{n}_{i=1} G_{i} (x_{i}), where \ G_{i} = x_{i} \oplus c.\]
 }
 
 \section{White-box DES}
