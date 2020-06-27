@@ -13,7 +13,7 @@
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 1 Overview}
 \author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
-\institute{\inst{1}{School of Computer Science, South China Normal University} \\ \inst{2}{Mobile Applications And Security Engineering Center of Guangdong Province}}
+\institute{\inst{1}{School of Computer Science, South China Normal University} \newline \\ \inst{2}{Mobile Applications And Security Engineering Center of Guangdong Province}}
 
 \date{\today}
 
@@ -32,7 +32,7 @@
 {
   \frametitle{What is cryptology?}
 
-  \textit{``Cryptology is about communication in the presence of \underline{adversaries or potential adversaries}"     \rightline{- R. Rivest}}
+  \textit{``\textcolor{red}{Cryptology} is about \textcolor{red}{communication} in the presence of adversaries or potential adversaries."     \scriptsize{\rightline{- R. Rivest, Handbook of Theoretical Computer Science}}}
   \begin{center}
   \begin{tikzpicture}
 
@@ -46,14 +46,17 @@
     \end{scope}
 
   \end{tikzpicture}
-        \end{center}
+  \end{center}
 }
 
 \frame
 {
   \frametitle{What is cryptography?}
 
-\begin{tikzpicture}
+    \textit{``\textcolor{red}{Cryptography} is about constructing and analyzing protocols that prevent third parties or the public from reading private messages." \scriptsize{\rightline{- M. Bellare and P. Rogaway, Introduction to Modern Cryptography}}}
+
+    \begin{center}
+    \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=6cm]{./pics/cryptography.png}};
 
     \begin{scope}[x={(image.south east)},y={(image.north west)}]
@@ -62,35 +65,50 @@
         %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
         \draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
     \end{scope}
-\end{tikzpicture}
+    \end{tikzpicture}
+    \end{center}
 
 }
 
 \frame
 {
- \frametitle{What we need for cryptography?}
+ \frametitle{Why we need cryptography in communications?}
 
  \begin{itemize}
  \setlength{\itemsep}{12pt}
  %\setlength{\parsep}{0pt}
  %\setlength{\parskip}{0pt}
  %\textcolor{red/blue/green/black/white/cyan/magenta/yellow}{text}
- \item \textcolor{red}{\underline{C}onfidentiality}: not just mean en/decryption, it imposes allow authorized people access privileged data
- \item \textcolor{magenta}{\underline{I}ntegrity}: not just mean signature, it includes how to prove the originality and the tractability of the data
- \item \textcolor{blue}{\underline{A}pplicability}: The cryptosystems must be practical
+ \item \textcolor{red}{\underline{C}onfidentiality}: not just mean en/decryption, it imposes allow authorized people access privileged data.
+ \item \textcolor{magenta}{\underline{I}ntegrity}: not just mean signature, it includes how to prove the originality and the tractability of the data.
+ \item \textcolor{blue}{\underline{A}uthenticity}: User and device must be authenticated for services.
  \end{itemize}
 }
 
 \frame
 {
-\frametitle{Kerckhoffs principle}
+\frametitle{Cryptography in mobile applications}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Mobile Payment: User authentication, transaction integrity.
+
+\item Digital Rights Management: User authentication, Content anti-piracy.
+
+\item Mobile OA (Office Automation): Digital signature, data protection.
+\end{itemize}
+
+}
+
+\frame
+{
+\frametitle{The Kerckhoffs principle in cryptography}
 \begin{columns}[c]
 \column{.65\textwidth}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item Do not rely on keeping an algorithm secret
-\item Publish an algorithm but keep the key secretly
-\item \textcolor{red}{Have some mathematical foundation for the belief that it will be hard to extract the key}
+\item Do not rely on keeping an algorithm secret.
+\item Publish an algorithm but keep the key secretly.
+\item \textcolor{red}{Have some mathematical foundation for the belief that it will be hard to extract the key.}
 \end{itemize}
 
 \column{.35\textwidth}
@@ -125,122 +143,42 @@
 
 \frame
 {
-\frametitle{Threat model of secret key (1)}
+\frametitle{Threats of secret key in mobile applications}
 \begin{itemize}
  \setlength{\itemsep}{12pt}
-\item There are three combinations in the mobile application threat model.
+\item There are three types of threats in mobile applications.
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item Benign host, Malicious client (APPs?)
-\item Malicious host, Malicious client (Cloud service?)
-\item Benign host, Benign client (VPN?)
+\item Benign host, Malicious client (APPs)
+\item Malicious host, Malicious client (Cloud service)
+\item Benign host, Benign client (VPN)
 \end{itemize}
 \setlength{\itemsep}{12pt}
 \item In most of mobile applications, hosts are assumed to be benign whilst client might be malicious or controlled by adversary.
 \end{itemize}
 }
 
-\frame
-{
-\frametitle{Threat model of secret key (2)}
-
-\begin{itemize}
- \setlength{\itemsep}{12pt}
- \item Black-box model: the adversary cannot intrude/alternate/observe the inside of the cryptosystem;
-
- \item Grey-box model: the adversary can \textcolor{red}{partially} intrude/alternate/observe the inside of the cryptosystem;
-
- \item White-box model: the adversary can \textcolor{red}{fully} intrude/alternate/observe the inside of the cryptosystem;
-\end{itemize}
-}
 
 \frame
 {
-\frametitle{Applications of black/grey-model-secure products}
-\begin{columns}[c]
-\column{.6\textwidth}
-\begin{itemize}
-\item A typical example is the maturing of USB keys
-\item The various manufactories and vendors provide different solutions to make RSA/ECC onboard (which also deliberately design to resist grey-box attackers).
-\item Eventually it works like a secure black box (and still evolving)
-\end{itemize}
-\column{.4\textwidth}
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=4.8cm]{./pics/usbkey.png}
-\end{figure}
-
-\end{columns}
-
-}
-
-\frame
-{
-\frametitle{Software protection techniques}
-\begin{itemize}
-\item \textcolor[rgb]{1.00, 0.00, 0.00}{Reverse engineering attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Code obfuscation}
-
-\item \textcolor[rgb]{1.00, 0.00, 0.00}{Modification attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Tamper resistance}
-
-\item \textcolor[rgb]{1.00, 0.00, 0.00}{Program-based attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Software diversity}
-
-\item \textcolor[rgb]{1.00, 0.00, 0.00}{BORE (Break Once Run Everywhere) attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Online/Offline registration verification}
-\end{itemize}
-
-In direct usage, \textcolor[rgb]{1.00, 0.00, 0.00}{white-box cryptography} can only solve the key recovery attacks and diversity problems. But it might be a building
-block for supporting code obfuscation, tamper resistance, software diversity and registration verification protection.
-}
-
-\frame
-{
-\frametitle{Hardware-aided software key security}
-In practice, many kinds of hardware are used to protect software \textcolor[rgb]{1.00, 0.00, 0.00}{key security}.
+\frametitle{Hardware-aided key protection}
+In practice, many kinds of hardware are used for protecting secret key in practice.
 \begin{columns}[c]
 \column{.6\textwidth}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item Environment validation: TPMs
-\item Authenticity: USB keys, TPMs
-\item Functionality: SE, Crypto ICs, Software USB doggles
+\item PC environment: TPMs, USB keys, Intel SGX.
+\item Mobile environment: TEE, SE, MicroUSB/Bluetooth USB keys.
 \end{itemize}
 \column{.4\textwidth}
 \begin{figure}[htbp]
 \centering
   \includegraphics[width=4.8cm]{./pics/dongles.jpg}
 \end{figure}
-
 \end{columns}
-}
-
-\frame
-{
-\frametitle{A typical white-box block cipher in a nutshell}
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
-
-\end{figure}
-
-}
 
 
-\frame
-{
-\frametitle{Why we need white-box crypto?}
-\begin{itemize}
-\setlength{\itemsep}{12pt}
-\item Although hardware-protected black/grey-box solutions are matured in the last decade, software solutions are still useful in many areas.
-
-\item To the best of my knowledge, the white-box crypto (which includes symmetric/asymmetric-key cryptosystems) is pivotal for the following practical issues.
-\begin{itemize}
-\setlength{\itemsep}{12pt}
-\item Hardware protection is costly (\textcolor{red}{price})
-\item Hardware solution is incompatible (\textcolor{red}{interoperability})
-\item Extreme system security protection (\textcolor{red}{key obfuscation})
-\item Algorithm implementation flexibility and complexity (\textcolor{red}{Complex functionality requirements})
-\end{itemize}
-\end{itemize}
-
+\textcolor{red}{Problem:} Hardware-aided solutions can hardly be compatible in various mobile devices and their platforms.
 }
 
 \frame
@@ -287,7 +225,136 @@ Although software solutions enjoy the interoperability and flexibility, the secu
 One usually refers to the above attacks as a \textcolor{red}{\textit{white-box}} adversary.
 }
 
-\section{Preliminaries of white-box cryptography}
+\frame
+{
+\frametitle{Security model of secret key}
+
+\begin{itemize}
+ \setlength{\itemsep}{12pt}
+ \item Black-box model: the adversary cannot intrude/alternate/observe the inside of the cryptosystem (mathematical cryptanalysis).
+
+ \item Grey-box model: the adversary can \textcolor{red}{partially} intrude/alternate/observe the inside of the cryptosystem (side-channel attacks).
+
+ \item \textcolor{red}{White-box model}: the adversary can \textcolor{red}{fully} intrude/alternate/observe the inside of the cryptosystem.
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Applications of black/grey-model-secure products}
+\begin{columns}[c]
+\column{.6\textwidth}
+\begin{itemize}
+\item A typical example is the maturing of USB keys
+\item The various manufactories and vendors provide different solutions to make RSA/ECC onboard (which also deliberately design to resist grey-box attackers).
+\item Eventually it works like a secure black box (and still evolving)
+\end{itemize}
+\column{.4\textwidth}
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=4.8cm]{./pics/usbkey.png}
+\end{figure}
+
+\end{columns}
+
+}
+
+\frame
+{
+\frametitle{Software protection techniques}
+\begin{itemize}
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{Reverse engineering attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Code obfuscation}
+
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{Modification attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Tamper resistance}
+
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{Program-based attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Software diversity}
+
+\item \textcolor[rgb]{1.00, 0.00, 0.00}{BORE (Break Once Run Everywhere) attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Online/Offline registration verification}
+\end{itemize}
+
+In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography} which plays a pivotal role in cryptographic software protection.
+}
+
+
+
+\frame
+{
+\frametitle{A typical white-box block cipher in a nutshell}
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
+
+\end{figure}
+
+}
+
+
+\frame
+{
+\frametitle{Why we need white-box crypto?}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Although hardware-protected black/grey-box solutions are matured in the last decade, software solutions are still useful in many areas.
+
+\item To the best of my knowledge, the white-box crypto (which includes symmetric/asymmetric-key cryptosystems) is pivotal for the following practical issues.
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Hardware protection is costly (\textcolor{red}{price})
+\item Hardware solution is incompatible (\textcolor{red}{interoperability})
+\item Extreme system security protection (\textcolor{red}{key obfuscation})
+\item Algorithm implementation flexibility and complexity (\textcolor{red}{Complex functionality requirements})
+\end{itemize}
+\end{itemize}
+
+}
+
+
+\section{The State-of-the-art of white-box cryptography}
+
+\frame
+{
+\frametitle{Basic security definitions for white-box crypto (1)}
+\begin{itemize}
+\item In SAC 2002, the security notions have  been informally described for white-box cryptography by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}
+\end{itemize}
+
+
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
+
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        \draw[red, thin, rounded corners] (0.85,0.7) circle (1.2cm);
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+}
+
+\frame
+{
+\frametitle{Basic security definitions for white-box crypto(2)}
+\begin{itemize}
+\item For more general security, \textcolor{red}{the strong white-box security} has been defined by Chow et al.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+}
+
+\section{White-box cryptography in mobile applications}
 \frame
 {
 \frametitle{Informal definitions of white-box crypto (1)}
@@ -364,67 +431,19 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \end{itemize}
 
 }
-
-
-
-\frame
-{
-\frametitle{Basic security definitions for white-box crypto (1)}
-\begin{itemize}
-\item In SAC 2002, the security notions have  been informally described for white-box cryptography by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}
-\end{itemize}
-
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
-
-    \begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        \draw[red, thin, rounded corners] (0.85,0.7) circle (1.2cm);
-    \end{scope}
-\end{tikzpicture}
-\end{center}
-}
-
-\frame
-{
-\frametitle{Basic security definitions for white-box crypto(2)}
-\begin{itemize}
-\item For more general security, \textcolor{red}{the strong white-box security} has been defined by Chow et al.
-\end{itemize}
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
-
-    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
-    %\end{scope}
-\end{tikzpicture}
-\end{center}
-}
-
-\section{The State-of-the-art of WBC}
-
 \section{Conclusion}
 
 \frame
 {
-\frametitle{}
+\frametitle{Conclusion}
 
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item Software security is significant for protecting applications in practice
+\item White-box cryptography is practical for protecting mobile applications.
 
-\item Software obfuscation and white-box cryptography are different fruits on same tree
+\item Software obfuscation and white-box cryptography are different fruits on the same tree.
 
-\item Applications have various requirements on white-box crypto
+\item Mobile applications have various requirements on white-box crypto.
 
 \end{itemize}
 
