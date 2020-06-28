@@ -217,12 +217,16 @@ In practice, many kinds of hardware are used for protecting secret key in practi
 Although software solutions enjoy the interoperability and flexibility, the security problems rise.
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item emulation
-\item run step-by-step in a debugger
-\item disassemble/decompile
+\item Emulation
+\item Run step-by-step in a debugger
+\item Disassemble/decompile
 \end{itemize}
 
-One usually refers to the above attacks as a \textcolor{red}{\textit{white-box}} adversary.
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=8cm]{./pics/WBC_Model.png}
+\end{figure}
+
 }
 
 \frame
@@ -237,6 +241,8 @@ One usually refers to the above attacks as a \textcolor{red}{\textit{white-box}}
 
  \item \textcolor{red}{White-box model}: the adversary can \textcolor{red}{fully} intrude/alternate/observe the inside of the cryptosystem.
 \end{itemize}
+
+Due to the threats in software solutions, it is widely accepted that adversary can exploit software in the \textcolor{red}{\textit{white-box}} model.
 }
 
 \frame
@@ -275,20 +281,6 @@ One usually refers to the above attacks as a \textcolor{red}{\textit{white-box}}
 In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography} which plays a pivotal role in cryptographic software protection.
 }
 
-
-
-\frame
-{
-\frametitle{A typical white-box block cipher in a nutshell}
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
-
-\end{figure}
-
-}
-
-
 \frame
 {
 \frametitle{Why we need white-box crypto?}
@@ -308,14 +300,40 @@ In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography}
 
 }
 
+\frame
+{
+\frametitle{A typical white-box block cipher in a nutshell}
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
+
+\end{figure}
+
+}
 
 \section{The State-of-the-art of white-box cryptography}
 
 \frame
 {
+\frametitle{The State-of-the-art of white-box cryptography}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Security notions and definitions.
+
+\item WBC implementations.
+
+\item WBC cryptanalsis techniques.
+
+\item WBC applications.
+
+\end{itemize}
+}
+
+\frame
+{
 \frametitle{Basic security definitions for white-box crypto (1)}
 \begin{itemize}
-\item In SAC 2002, the security notions have  been informally described for white-box cryptography by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}
+\item In SAC 2002, the security notions have been defined by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}.
 \end{itemize}
 
 
@@ -337,7 +355,7 @@ In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography}
 {
 \frametitle{Basic security definitions for white-box crypto(2)}
 \begin{itemize}
-\item For more general security, \textcolor{red}{the strong white-box security} has been defined by Chow et al.
+\item For more general security, \textcolor{red}{the strong white-box security} has been defined by Biryukov \textit{et al.} at ASIACRYPT 2014.
 \end{itemize}
 
 \begin{center}
@@ -354,19 +372,175 @@ In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography}
 \end{center}
 }
 
-\section{White-box cryptography in mobile applications}
 \frame
 {
-\frametitle{Informal definitions of white-box crypto (1)}
+\frametitle{Provable security of WBC}
+
+\begin{itemize}
+\item Saxena \textit{et al.} proposed security notions and a provable secure case ECC pairing for WBC at ISC 2009.
+
+\item Delerablee \textit{et al.} extended Saxena \textit{et al.}'s work and proposed an RSA-based WBC at SAC 2013.
+
+\item Biyukov \textit{et al.} proposed weak/strong white-box security notions at ASIACRYPT 2014.
+
+\item Foque \textit{et al.} improved the notions with WhiteBlock at ASIACRYPT 2016.
+
+\item Biyukov and Perrin. proposed symmetrically/asymmetrically hard security model at Crypto 2017.
+
+\item Bock \textit{et al.} proposed Indistinguishability for White-Box Hardware/Application Binding at CHES 2020.
+
+\end{itemize}
+
+}
+
+\frame
+{
+\frametitle{WBC Implementations of DES/AES/SM4 (All broken!)}
+\begin{itemize}
+\item Chow \textit{et al.} Tbox-based WBDES/AES, 2002
+\item Bringer. Isomorphism of Polynomials, WBAES, 2006
+\item Xiao and Lai. 16-bit Tbox WBAES, 2009
+\item Xiao and Lai. Affine-function WBSM4, 2009
+\item Karroumi \textit{et al.} Dual-cipher WBAES, 2011
+\item Baek \textit{et al.} Larger Tbox WBAES, 2016
+\item Lee \textit{et al.} Masked WBAES, 2018
+\item Xu \textit{et al.} Obfuscated round boundaries WBAES/SM4, 2018
+\item Lee and Kim. Table redundancy WBAES, 2019
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Dedicated WBC Proposals}
+\begin{itemize}
+\item Biyukov \textit{et al.} ASASA structure, 2014
+\item Bogdanov and Isobe. SPACE, 2015
+\item Bogdanov and Isobe. SPNbox, 2016
+\item Cho and Dinur. WEM, 2017
+\item Zhou \textit{et al.} Lightweight WBC, 2018
+\item Lv \textit{et al.} WB-KMAC, 2019
+\item Shi \textit{et al.} SDSRS, 2020 
+\item Kwon \textit{et al.} FPL, 2020
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Algebraic cryptanalysis techniques for WBC}
+\begin{itemize}
+\item BGE attack on WB-AES
+\begin{itemize}
+\item Billet et al. 2004
+\end{itemize}
+
+\item Generic attack on SPN structure WBC
+\begin{itemize}
+\item Michiels et al. 2008
+\end{itemize}
+
+\item Attack on the variants
+\begin{itemize}
+\item De Mulder et al. 2010
+\item De Mulder et al. 2012
+\item Lepoint et al. 2013
+\item Derbez 2017
+\end{itemize}
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{Algebraic cryptanalysis on WBAES/SM4}
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=10cm]{./pics/WBCCryptanlysis.png}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{Side-channel techniques for WBC}
+
+\begin{itemize}
+\item Bos \textit{et al.} Differential computation/fault analysis (DCA/DFA), 2016
+
+\item Goubin \textit{et al.} Linear Decoding Analysis, 2018
+
+\item Bock \textit{et al.} Dynamic Binary Instrumentation (DBI), 2019
+
+\item Zeyad \textit{et al.} Statistical Bucketing Attack (SBA), 2019
+
+\item Bogdanov \textit{et al.} High-order DCA, 2019
+
+\item Rivain and Wang. Improved DCA, 2019
+
+\item Amadori \textit{et al.} BGE+DCA, 2019
+
+\end{itemize}
+
+}
+
+\frame
+{
+\frametitle{WBC applications}
+
+\begin{itemize}
+\item Academic proposals
+\begin{itemize}
+\item Software tamper resistance:
+\begin{itemize}
+\item Michiels and Gorissen, DRM 2007; 
+\item Lin \textit{et al.}, iSCI 2019.
+\end{itemize}
+
+\item Digital rights management: Liu and Hu, ePrint 2017.
+
+\item IoT application: Shi \textit{et al.}, 2020.
+
+\end{itemize}
+
+\item Industrial products
+\begin{itemize}
+\item Irdeto, cloakware.
+\item Intertrust, whiteCryption.
+\item Denuvo, game anti-piracy.
+\end{itemize}
+\end{itemize}
+
+}
+
+\section{White-box cryptography in mobile applications}
+
+\frame
+{
+\frametitle{White-box crypto in mobile applications}
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=6cm]{./pics/WBC_MobileApplication.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+
+}
+
+\frame
+{
+\frametitle{Informal definitions of white-box crypto (in mobile applications)}
 Informally I have the following concerns about white-box crypto:
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item From the view of crypto key security, it implies
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item secret key protection: adversary cannot extract secret key from software (no matter whether running or not)
+\item secret key protection: adversary cannot extract secret key from software (no matter whether running or not).
 
-\item key distribution mechanism: only designated user/server can generate the white-box version secret key (quite close to public-key crypto, but not exactly the same)
+\item key distribution mechanism: only designated user/server can generate the white-box version secret key (quite close to public-key crypto, but not exactly the same).
 
 \end{itemize}
 \end{itemize}
@@ -374,17 +548,17 @@ Informally I have the following concerns about white-box crypto:
 
 \frame
 {
-\frametitle{Informal definitions of white-box crypto (2)}
+\frametitle{Informal definitions of white-box crypto (in mobile applications)}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item From the view of software developer, it implies
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item cryptographic obfuscation: the algorithm is public, but only the secret key is obfuscated
+\item Cryptographic obfuscation: the algorithm is public, but only the secret key is obfuscated.
 
-\item code/space/time hardness: the time/memory/space complexities will increased (heavily)
+\item Code/space/time hardness: the time/memory/space complexities will increased (heavily).
 
-\item Function abstraction: After white-box implementation, a function's inner functionality is no longer publicly verifiable
+\item Function abstraction: After white-box implementation, a function's inner functionality is no longer publicly verifiable.
 \end{itemize}
 \end{itemize}
 
@@ -392,7 +566,7 @@ Informally I have the following concerns about white-box crypto:
 
 \frame
 {
-\frametitle{Differences between software obfuscation and white-box crypto}
+\frametitle{Differences between software obfuscation and white-box cryptography}
 Software obfuscation and white-box crypto can operate together to achieve concrete security, while they have different purposes:
 \begin{itemize}
 \setlength{\itemsep}{12pt}
@@ -407,7 +581,7 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 
 \frame
 {
-\frametitle{White-box crypto working range}
+\frametitle{White-box cryptography working range}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item To resist adversary, a software should be secure against:
@@ -417,15 +591,17 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 
 \item Dynamic analysis: from memory to extract information
 
-\item Code lift: change the execution order/function, which breaks the integrity of software
+\item Code lifting: change the execution order/function, which breaks the integrity of software
 \end{itemize}
 
-\item For white-box crypto, we mainly focus on
+\item For white-box crypto, the priority of security goals are listed as follows.
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item functionality is executed as designed
+\item Functionality is executed as designed.
 
-\item key is not leaked
+\item Secret key (or its equivalence) cannot leaked.
+
+\item Application/device-binding property.
 \end{itemize}
 
 \end{itemize}
