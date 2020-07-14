@@ -130,14 +130,19 @@
 \frame
 {
 \frametitle{White-box diversity}
-\textcolor{red}{\textsl{White-box diversity}} (WB-div) counts in how many distinct ways a particular unencoded lookup table can be encoded by randomly and independently chosen permutations.
+\begin{itemize}
+\item \textcolor{red}{\textsl{White-box diversity}} (WB-div) counts in how many distinct ways a particular unencoded lookup table can be encoded by randomly and independently chosen permutations.
 
 \begin{itemize}
 \item $\mathbb{F}_{2}$-linear/non-linear
 \item $\mathbb{F}_{2}$-affine/non-affine
 \end{itemize}
 
-For key-dependent lookup tables, the variation of the embedded key-material needs to be taken into account.
+\item For key-dependent lookup tables, the variation of the embedded key-material needs to be taken into account. For key-independent lookup tables, $keyspace=1$.
+\end{itemize}
+
+\[WB-div = keyspace \times tablespace\].
+
 }
 
 \frame
