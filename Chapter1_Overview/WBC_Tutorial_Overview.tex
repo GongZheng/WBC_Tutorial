@@ -1,18 +1,23 @@
-\documentclass{beamer}
-\usepackage{times}
+%-------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%-------------------------------------------------------------------------------
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage{beamerthemesplit}
 \usepackage{tikz}
-%\usepackage{beamerthemesplit}
-\usepackage[utf8]{inputenc}
-%Load useful packages
+%\usetheme{Antibes}
+\usetheme{Simple}
+
+\usepackage{subfigure}
+\usepackage{hyperref}
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
-\usepackage{subcaption}
-\usepackage{subfiles}
-\usepackage{url}
-\usepackage{amssymb}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 1 Overview}
-\author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
+\author{SCNUCrypto\inst{1,2}\\ \url{cis.gong@gmail.com}}
 \institute{\inst{1}{School of Computer Science, South China Normal University} \newline \\ \inst{2}{Mobile Applications And Security Engineering Center of Guangdong Province}}
 
 \date{\today}
@@ -26,6 +31,18 @@
 
 \section[Outline]{}
 \frame{\tableofcontents}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[
+        currentsection,
+        sectionstyle=show/shaded,
+        subsectionstyle=show/show/hide,
+        subsubsectionstyle=show/shaded/hide]
+  \end{frame}
+}
 
 \section{Introduction}
 \frame
@@ -85,19 +102,8 @@
  \end{itemize}
 }
 
-\frame
-{
-\frametitle{Cryptography in mobile applications}
-\begin{itemize}
-\setlength{\itemsep}{12pt}
-\item Mobile Payment: User authentication, transaction integrity.
 
-\item Digital Rights Management: User authentication, Content anti-piracy.
-
-\item Mobile OA (Office Automation): Digital signature, data protection.
-\end{itemize}
-
-}
+\section{The ``key" problem in crypography}
 
 \frame
 {
@@ -140,6 +146,8 @@
 \end{tikzpicture}
 \end{center}
 }
+
+
 
 \frame
 {
@@ -229,20 +237,39 @@ Although software solutions enjoy the interoperability and flexibility, the secu
 
 }
 
-\frame
-{
-\frametitle{Security model of secret key}
-
+\frame{
+\frametitle{Black/White/Grey-box models}
+\begin{block}{Black-box model}
 \begin{itemize}
- \setlength{\itemsep}{12pt}
- \item Black-box model: the adversary cannot intrude/alternate/observe the inside of the cryptosystem (mathematical cryptanalysis).
+\item The adversary is able to know, (adaptively) choose inputs and obtain outputs.
 
- \item Grey-box model: the adversary can \textcolor{red}{partially} intrude/alternate/observe the inside of the cryptosystem (side-channel attacks).
-
- \item \textcolor{red}{White-box model}: the adversary can \textcolor{red}{fully} intrude/alternate/observe the inside of the cryptosystem.
+\item Given the black-box implementation of the function, the adversary aims to \textcolor{red}{recover the secret values} or to \textcolor{orange}{misbehave the function}.
 \end{itemize}
+\end{block}
 
-Due to the threats in software solutions, it is widely accepted that adversary can exploit software in the \textcolor{red}{\textit{white-box}} model.
+\begin{alertblock}{White-box model}
+\begin{itemize}
+\item The adversary can tamper, modify, manipulate all intermediate values and processes of the implementation of a secrecy system.
+\item \alert{full knowledge} of the underlying cryptosystem \alert{except the secret values}.
+\end{itemize}
+\end{alertblock}
+
+\begin{block}{Grey-box model}
+According to the black/white-box models, a grey-box adversary is able to
+\begin{itemize}
+\item know, choose or adaptively choose inputs and outputs of the function;
+\item tamper, modify, manipulate intermediate values with specific knowledge.
+
+\end{itemize}
+\end{block}
+}
+
+\frame{
+\frametitle{An illustration of the black/white/grey-box models}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=9cm,height=4cm]{./pics/Illustration-of-the-concept-of-Black-White-Grey-box-modeling.png};
+\end{figure}
 }
 
 \frame
@@ -278,12 +305,36 @@ Due to the threats in software solutions, it is widely accepted that adversary c
 \item \textcolor[rgb]{1.00, 0.00, 0.00}{BORE (Break Once Run Everywhere) attacks} - \textcolor[rgb]{0.00,1.00,0.00}{Online/Offline registration verification}
 \end{itemize}
 
-In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography} which plays a pivotal role in cryptographic software protection.
+In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography} (WBC) which plays a pivotal role in cryptographic software protection.
+}
+
+\section{White-box crypogrpahy}
+
+\frame{
+\frametitle{The goal of modern cryptography}
+\begin{alertblock}{}
+The goal of modern cryptography is to design, analysis, and implement a cryptosystem which obtains \textcolor{red}{a mathematically acceptable security proofs on a certain model!}
+\end{alertblock}
+\begin{itemize}
+\item From \textcolor{red}{theoretical} view:
+\begin{itemize}
+\item Ideal cipher/Random oracle model: Black-box analysis based on complexity
+\item Indistinguishability/Indifferentiability model: Coin-tossing game
+\item Key resilient/leakage model: Key-lossing assumption based provable security
+\end{itemize}
+
+
+\item From \textcolor{red}{heuristic} view:
+\begin{itemize}
+\item \textcolor{red}{Black/White/Grey-box models}
+\end{itemize}
+\end{itemize}
+
 }
 
 \frame
 {
-\frametitle{Why we need white-box crypto?}
+\frametitle{Why we need white-box cryptography?}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 \item Although hardware-protected black/grey-box solutions are matured in the last decade, software solutions are still useful in many areas.
@@ -302,7 +353,7 @@ In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography}
 
 \frame
 {
-\frametitle{A typical white-box block cipher in a nutshell}
+\frametitle{A typical white-box crypto in a nutshell}
 \begin{figure}[htbp]
 \centering
   \includegraphics[width=10cm]{./pics/WBCrypto_Functional_Model.png}
@@ -311,209 +362,23 @@ In SAC 2002, Chow \textit{et al.} first proposed \textit{white-box cryptography}
 
 }
 
-\section{The State-of-the-art of white-box cryptography}
-
 \frame
 {
-\frametitle{The State-of-the-art of white-box cryptography}
+\frametitle{The pivotal role that WBC plays in mobile applications}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
-\item Security notions and definitions.
+\item Mobile Payment: User authentication, transaction integrity.
 
-\item WBC implementations.
+\item Digital Rights Management: User authentication, Content anti-piracy.
 
-\item WBC cryptanalsis techniques.
-
-\item WBC applications.
-
-\end{itemize}
-}
-
-\frame
-{
-\frametitle{Basic security definitions for white-box crypto (1)}
-\begin{itemize}
-\item In SAC 2002, the security notions have been defined by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}.
-\end{itemize}
-
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
-
-    \begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        \draw[red, thin, rounded corners] (0.85,0.7) circle (1.2cm);
-    \end{scope}
-\end{tikzpicture}
-\end{center}
-}
-
-\frame
-{
-\frametitle{Basic security definitions for white-box crypto(2)}
-\begin{itemize}
-\item For more general security, \textcolor{red}{the strong white-box security} has been defined by Biryukov \textit{et al.} at ASIACRYPT 2014.
-\end{itemize}
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
-
-    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
-    %\end{scope}
-\end{tikzpicture}
-\end{center}
-}
-
-\frame
-{
-\frametitle{Provable security of WBC}
-
-\begin{itemize}
-\item Saxena \textit{et al.} proposed security notions and a provable secure case ECC pairing for WBC at ISC 2009.
-
-\item Delerablee \textit{et al.} extended Saxena \textit{et al.}'s work and proposed an RSA-based WBC at SAC 2013.
-
-\item Biyukov \textit{et al.} proposed weak/strong white-box security notions at ASIACRYPT 2014.
-
-\item Foque \textit{et al.} improved the notions with WhiteBlock at ASIACRYPT 2016.
-
-\item Biyukov and Perrin. proposed symmetrically/asymmetrically hard security model at Crypto 2017.
-
-\item Bock \textit{et al.} proposed Indistinguishability for White-Box Hardware/Application Binding at CHES 2020.
-
+\item Mobile OA (Office Automation): Digital signature, data protection.
 \end{itemize}
 
 }
 
 \frame
 {
-\frametitle{WBC Implementations of DES/AES/SM4 (All broken!)}
-\begin{itemize}
-\item Chow \textit{et al.} Tbox-based WBDES/AES, 2002
-\item Bringer. Isomorphism of Polynomials, WBAES, 2006
-\item Xiao and Lai. 16-bit Tbox WBAES, 2009
-\item Xiao and Lai. Affine-function WBSM4, 2009
-\item Karroumi \textit{et al.} Dual-cipher WBAES, 2011
-\item Baek \textit{et al.} Larger Tbox WBAES, 2016
-\item Lee \textit{et al.} Masked WBAES, 2018
-\item Xu \textit{et al.} Obfuscated round boundaries WBAES/SM4, 2018
-\item Lee and Kim. Table redundancy WBAES, 2019
-\end{itemize}
-}
-
-\frame
-{
-\frametitle{Dedicated WBC Proposals}
-\begin{itemize}
-\item Biyukov \textit{et al.} ASASA structure, 2014
-\item Bogdanov and Isobe. SPACE, 2015
-\item Bogdanov and Isobe. SPNbox, 2016
-\item Cho and Dinur. WEM, 2017
-\item Zhou \textit{et al.} Lightweight WBC, 2018
-\item Lv \textit{et al.} WB-KMAC, 2019
-\item Shi \textit{et al.} SDSRS, 2020
-\item Kwon \textit{et al.} FPL, 2020
-\end{itemize}
-}
-
-\frame
-{
-\frametitle{Algebraic cryptanalysis techniques for WBC}
-\begin{itemize}
-\item BGE attack on WB-AES
-\begin{itemize}
-\item Billet et al. 2004
-\end{itemize}
-
-\item Generic attack on SPN structure WBC
-\begin{itemize}
-\item Michiels et al. 2008
-\end{itemize}
-
-\item Attack on the variants
-\begin{itemize}
-\item De Mulder et al. 2010
-\item De Mulder et al. 2012
-\item Lepoint et al. 2013
-\item Derbez 2017
-\end{itemize}
-\end{itemize}
-}
-
-\frame
-{
-\frametitle{Algebraic cryptanalysis on WBAES/SM4}
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=10cm]{./pics/WBCCryptanlysis.png}
-\end{figure}
-}
-
-\frame
-{
-\frametitle{Side-channel techniques for WBC}
-
-\begin{itemize}
-\item Bos \textit{et al.} Differential computation/fault analysis (DCA/DFA), 2016
-
-\item Goubin \textit{et al.} Linear Decoding Analysis, 2018
-
-\item Bock \textit{et al.} Dynamic Binary Instrumentation (DBI), 2019
-
-\item Zeyad \textit{et al.} Statistical Bucketing Attack (SBA), 2019
-
-\item Bogdanov \textit{et al.} High-order DCA, 2019
-
-\item Rivain and Wang. Improved DCA, 2019
-
-\item Amadori \textit{et al.} BGE+DFA, breaks 8-bit external output encoding, 2019
-
-\end{itemize}
-
-}
-
-\frame
-{
-\frametitle{WBC applications}
-
-\begin{itemize}
-\item Academic proposals
-\begin{itemize}
-\item Software tamper resistance:
-\begin{itemize}
-\item Michiels and Gorissen, DRM 2007;
-\item Lin \textit{et al.}, iSCI 2019.
-\end{itemize}
-
-\item Digital rights management: Liu and Hu, ePrint 2017.
-
-\item IoT application: Shi \textit{et al.}, 2020.
-
-\end{itemize}
-
-\item Industrial products
-\begin{itemize}
-\item Irdeto, cloakware.
-\item Intertrust, whiteCryption.
-\item Denuvo, game anti-piracy.
-\end{itemize}
-\end{itemize}
-
-}
-
-\section{White-box cryptography in mobile applications}
-
-\frame
-{
-\frametitle{White-box crypto in mobile applications}
+\frametitle{WBC in mobile applications}
 \begin{center}
 \begin{tikzpicture}
     \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=6cm]{./pics/WBC_MobileApplication.png}};
@@ -607,6 +472,206 @@ Software obfuscation and white-box crypto can operate together to achieve concre
 \end{itemize}
 
 }
+
+
+\section{The State-of-the-art of white-box cryptography}
+
+\frame
+{
+\frametitle{The State-of-the-art of white-box cryptography}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Security notions and definitions.
+
+\item WBC proposals and implementations.
+
+\item WBC cryptanalsis techniques.
+
+\item WBC applications.
+
+\end{itemize}
+}
+
+%\frame
+%{
+%\frametitle{Basic security definitions for white-box crypto (1)}
+%\begin{itemize}
+%\item In SAC 2002, the security notions have been defined by Chow \textit{et al.}. First the key recovery problem is informally defined by \textcolor{red}{the weak white-box security}.
+%\end{itemize}
+%
+%
+%\begin{center}
+%\begin{tikzpicture}
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=4cm]{./pics/weak_white_box_security.png}};
+%
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+%        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+%        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+%        \draw[red, thin, rounded corners] (0.85,0.7) circle (1.2cm);
+%    \end{scope}
+%\end{tikzpicture}
+%\end{center}
+%}
+%
+%\frame
+%{
+%\frametitle{Basic security definitions for white-box crypto(2)}
+%\begin{itemize}
+%\item For more general security, \textcolor{red}{the strong white-box security} has been defined by Biryukov \textit{et al.} at ASIACRYPT 2014.
+%\end{itemize}
+%
+%\begin{center}
+%\begin{tikzpicture}
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=10cm, height=4cm]{./pics/strong_white_box_security.png}};
+%
+%    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+%        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+%        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+%        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+%    %\end{scope}
+%\end{tikzpicture}
+%\end{center}
+%}
+%
+%\frame
+%{
+%\frametitle{Provable security of WBC}
+%
+%\begin{itemize}
+%\item Saxena \textit{et al.} proposed security notions and a provable secure case ECC pairing for WBC at ISC 2009.
+%
+%\item Delerablee \textit{et al.} extended Saxena \textit{et al.}'s work and proposed an RSA-based WBC at SAC 2013.
+%
+%\item Biyukov \textit{et al.} proposed weak/strong white-box security notions at ASIACRYPT 2014.
+%
+%\item Foque \textit{et al.} improved the notions with WhiteBlock at ASIACRYPT 2016.
+%
+%\item Biyukov and Perrin. proposed symmetrically/asymmetrically hard security model at Crypto 2017.
+%
+%\item Bock \textit{et al.} proposed Indistinguishability for White-Box Hardware/Application Binding at CHES 2020.
+%
+%\end{itemize}
+%
+%}
+%
+%\frame
+%{
+%\frametitle{WBC Implementations of DES/AES/SM4 (All broken!)}
+%\begin{itemize}
+%\item Chow \textit{et al.} Tbox-based WBDES/AES, 2002
+%\item Bringer. Isomorphism of Polynomials, WBAES, 2006
+%\item Xiao and Lai. 16-bit Tbox WBAES, 2009
+%\item Xiao and Lai. Affine-function WBSM4, 2009
+%\item Karroumi \textit{et al.} Dual-cipher WBAES, 2011
+%\item Baek \textit{et al.} Larger Tbox WBAES, 2016
+%\item Lee \textit{et al.} Masked WBAES, 2018
+%\item Xu \textit{et al.} Obfuscated round boundaries WBAES/SM4, 2018
+%\item Lee and Kim. Table redundancy WBAES, 2019
+%\end{itemize}
+%}
+%
+%\frame
+%{
+%\frametitle{Dedicated WBC Proposals}
+%\begin{itemize}
+%\item Biyukov \textit{et al.} ASASA structure, 2014
+%\item Bogdanov and Isobe. SPACE, 2015
+%\item Bogdanov and Isobe. SPNbox, 2016
+%\item Cho and Dinur. WEM, 2017
+%\item Zhou \textit{et al.} Lightweight WBC, 2018
+%\item Lv \textit{et al.} WB-KMAC, 2019
+%\item Shi \textit{et al.} SDSRS, 2020
+%\item Kwon \textit{et al.} FPL, 2020
+%\end{itemize}
+%}
+%
+%\frame
+%{
+%\frametitle{Algebraic cryptanalysis techniques for WBC}
+%\begin{itemize}
+%\item BGE attack on WB-AES
+%\begin{itemize}
+%\item Billet et al. 2004
+%\end{itemize}
+%
+%\item Generic attack on SPN structure WBC
+%\begin{itemize}
+%\item Michiels et al. 2008
+%\end{itemize}
+%
+%\item Attack on the variants
+%\begin{itemize}
+%\item De Mulder et al. 2010
+%\item De Mulder et al. 2012
+%\item Lepoint et al. 2013
+%\item Derbez 2017
+%\end{itemize}
+%\end{itemize}
+%}
+%
+%\frame
+%{
+%\frametitle{Algebraic cryptanalysis on WBAES/SM4}
+%\begin{figure}[htbp]
+%\centering
+%  \includegraphics[width=10cm]{./pics/WBCCryptanlysis.png}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%\frametitle{Side-channel techniques for WBC}
+%
+%\begin{itemize}
+%\item Bos \textit{et al.} Differential computation/fault analysis (DCA/DFA), 2016
+%
+%\item Goubin \textit{et al.} Linear Decoding Analysis, 2018
+%
+%\item Bock \textit{et al.} Dynamic Binary Instrumentation (DBI), 2019
+%
+%\item Zeyad \textit{et al.} Statistical Bucketing Attack (SBA), 2019
+%
+%\item Bogdanov \textit{et al.} High-order DCA, 2019
+%
+%\item Rivain and Wang. Improved DCA, 2019
+%
+%\item Amadori \textit{et al.} BGE+DFA, breaks 8-bit external output encoding, 2019
+%
+%\end{itemize}
+%
+%}
+%
+%\frame
+%{
+%\frametitle{WBC applications}
+%
+%\begin{itemize}
+%\item Academic proposals
+%\begin{itemize}
+%\item Software tamper resistance:
+%\begin{itemize}
+%\item Michiels and Gorissen, DRM 2007;
+%\item Lin \textit{et al.}, iSCI 2019.
+%\end{itemize}
+%
+%\item Digital rights management: Liu and Hu, ePrint 2017.
+%
+%\item IoT application: Shi \textit{et al.}, 2020.
+%
+%\end{itemize}
+%
+%\item Industrial products
+%\begin{itemize}
+%\item Irdeto, cloakware.
+%\item Intertrust, whiteCryption.
+%\item Denuvo, game anti-piracy.
+%\end{itemize}
+%\end{itemize}
+%
+%}
+
 \section{Conclusion}
 
 \frame
