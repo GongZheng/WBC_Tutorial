@@ -1,11 +1,22 @@
-\documentclass{beamer}
-\usepackage{times}
-\usepackage{tikz}
+%-------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%-------------------------------------------------------------------------------
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
 \usepackage{beamerthemesplit}
+\usepackage{times}
 \usepackage{tcolorbox}
+\usepackage{tikz}
+%\usetheme{Antibes}
+\usetheme{Simple}
+
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
 
 \title{A Tutorial of White-Box Cryptography \\ Chapter 2 Notions and Definitions}
-\author{Zheng Gong\inst{1,2}\\ \url{cis.gong@gmail.com}}
+\author{SCNUCrypto\inst{1,2}\\ \url{cis.gong@gmail.com}}
 \institute{\inst{1}{School of Computer Science, South China Normal University} \\ \inst{2}{Mobile Applications And Security Engineering Center of Guangdong Province}}
 
 \date{\today}
@@ -19,6 +30,18 @@
 
 \section[Outline]{}
 \frame{\tableofcontents}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[
+        currentsection,
+        sectionstyle=show/shaded,
+        subsectionstyle=show/show/hide,
+        subsubsectionstyle=show/shaded/hide]
+  \end{frame}
+}
 
 \section{White-box cryptography}
 \frame
