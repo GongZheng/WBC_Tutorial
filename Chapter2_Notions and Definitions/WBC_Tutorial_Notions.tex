@@ -43,6 +43,128 @@
   \end{frame}
 }
 
+\section{The commercial regulations and administrations}
+
+\frame
+{
+\frametitle{The published standards}
+As a cryptographic product, white-box crypto also has to be regulated and governed by standards.  There are two widely-accepted standards for the security of cryptographic modules:
+
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item FIPS 140-2 (U.S. Standard, internationally accepted)
+
+\item GM/T 0028/0039-2014 (Chinese Standard, learn from FIPS 140-2)
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{FIPS 140-2}
+In FIPS 140-2, 4 security levels are defined for cryptographic modules to be evaluated
+\begin{itemize}
+\setlength{\itemsep}{6pt}
+\item Level 1:  Use a standard cryptographic algorithm and implement validately
+
+\item Level 2: Achieve Level 1 whilst enforce the role-base authentication on the cryptographic module
+
+\item Level 3: Achieve Level 2 whilst enforce the identity-base authentication on the cryptographic module with physical protection
+
+\item Level 4: Achieve Level 3, intrusion resistance with immediate zeroization, self-test
+\end{itemize}
+
+}
+
+\frame
+{
+\frametitle{FIPS 140-2: Level 1}
+
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=2.1cm]{./pics/Level1.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+
+}
+
+\frame
+{
+\frametitle{FIPS 140-2: Level 2}
+
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level2.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+
+}
+
+\frame
+{
+\frametitle{FIPS 140-2: Level 3}
+
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level3.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+
+}
+
+\frame
+{
+\frametitle{FIPS 140-2: Level 4}
+
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=4cm]{./pics/Level4.png}};
+
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+\end{center}
+
+}
+
+\frame
+{
+\frametitle{Chinese standard GM/T 0028/0039-2014}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Also divided into 4 security levels and very similar to FIPS 140-2
+
+\item Add Security Level 2+ and 3+ to fix the gap between software and hardware security assurances.
+
+\item Only for Chinese commercial cryptographic schemes and protocols (SM1/2/3/4/9 series)
+
+\end{itemize}
+}
+
 \section{White-box cryptography}
 \frame
 {
@@ -216,6 +338,19 @@ The goal of modern cryptography is to design, analysis, and implement a cryptosy
 
 }
 
+\frame{
+\frametitle{Space-hard ciphers:SPACE}
+\begin{itemize}
+\item In CCS 2015, Bogdanov and Isobe proposed a family of white-box block cipher \textcolor{red}{SPACE} with several novel features.
+\begin{itemize}
+\item SPACE-hardness: The implementation of $E_{K}$ is $(M, Z)$-space hard if it is infeasible to en/decrypt any randomly drawn plain/ciphertext with probability of more than $2^{-Z}$ given any code (LUT) of size less than $M$.\newline
+
+\item Strong $(M, Z)-Space hardness$: existential possibility version of $(M, Z)-Space hardness$.
+\end{itemize}
+\end{itemize}
+
+}
+
 \section{A case study on DRM required white-box security}
 
 \frame
@@ -273,125 +408,33 @@ The goal of modern cryptography is to design, analysis, and implement a cryptosy
 \end{enumerate}
 }
 
-\section{The commercial regulations and administrations}
+\frame{
+\frametitle{Bock \textit{et al.}'s white-box security with hardware/application-binding}
+In Asiacrypt 2020 and CHES 2020, Bock \textit{et al.} proposed a white-box security key derivation function with \textcolor{red}{hardware/application-binding}, and then built a white-box payment application on it.
 
-\frame
-{
-\frametitle{The published standards}
-As a cryptographic product, white-box crypto also has to be regulated and governed by standards.  There are two widely-accepted standards for the security of cryptographic modules:
+\begin{center}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=8cm, height=5cm]{./pics/WKDF.png}};
 
+    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
+        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
+    %\end{scope}
+\end{tikzpicture}
+
+\end{center}
+}
+
+\frame{
+\frametitle{The problems of Bock \textit{et al.}'s hardware/application bound white-box security}
 \begin{itemize}
-\setlength{\itemsep}{12pt}
-\item FIPS 140-2 (U.S. Standard, internationally accepted)
+\item It is not truly white-box security anymore if the precondition is a secure hardware. It becomes trusted computing.\newline
 
-\item GM/T 0028/0039-2014 (Chinese Standard, learn from FIPS 140-2)
-\end{itemize}
-}
+\item How to achieve hardware-binding is missing in the paper, the authors suggest using Android Keystore (which is insecure when it is rooted.)\newline
 
-\frame
-{
-\frametitle{FIPS 140-2}
-In FIPS 140-2, 4 security levels are defined for cryptographic modules to be evaluated
-\begin{itemize}
-\setlength{\itemsep}{6pt}
-\item Level 1:  Use a standard cryptographic algorithm and implement validately
-
-\item Level 2: Achieve Level 1 whilst enforce the role-base authentication on the cryptographic module
-
-\item Level 3: Achieve Level 2 whilst enforce the identity-base authentication on the cryptographic module with physical protection
-
-\item Level 4: Achieve Level 3, intrusion resistance with immediate zeroization, self-test
-\end{itemize}
-
-}
-
-\frame
-{
-\frametitle{FIPS 140-2: Level 1}
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=2.1cm]{./pics/Level1.png}};
-
-    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
-    %\end{scope}
-\end{tikzpicture}
-\end{center}
-
-}
-
-\frame
-{
-\frametitle{FIPS 140-2: Level 2}
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level2.png}};
-
-    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
-    %\end{scope}
-\end{tikzpicture}
-\end{center}
-
-}
-
-\frame
-{
-\frametitle{FIPS 140-2: Level 3}
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=3.4cm]{./pics/Level3.png}};
-
-    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
-    %\end{scope}
-\end{tikzpicture}
-\end{center}
-
-}
-
-\frame
-{
-\frametitle{FIPS 140-2: Level 4}
-
-\begin{center}
-\begin{tikzpicture}
-    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=11cm, height=4cm]{./pics/Level4.png}};
-
-    %\begin{scope}[x={(image.south east)},y={(image.north west)}]
-        %\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
-        %\foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-        %\foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
-        %\draw[green, ultra thick, rounded corners] (0.24,0.18) rectangle (0.50,0.32);
-    %\end{scope}
-\end{tikzpicture}
-\end{center}
-
-}
-
-\frame
-{
-\frametitle{Chinese standard GM/T 0028/0039-2014}
-\begin{itemize}
-\setlength{\itemsep}{12pt}
-\item Also divided into 4 security levels and very similar to FIPS 140-2
-
-\item Add Security Level 2+ and 3+ to fix the gap between software and hardware security assurances.
-
-\item Only for Chinese commercial cryptographic schemes and protocols (SM1/2/3/4/9 series)
-
+\item \textcolor{red}{If we already had a trusted hardware, why we need white-box cryptography? (e.g., using TEE is a better choice)}
 \end{itemize}
 }
 
